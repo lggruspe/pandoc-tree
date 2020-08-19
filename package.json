@@ -1,0 +1,23 @@
+{
+  "name": "pandoc-tree",
+  "version": "1.0.0",
+  "description": "Pandoc filters library",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lggruspe/pandoc-tree.git"
+  },
+  "keywords": [
+    "pandoc"
+  ],
+  "author": "Levi Gruspe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lggruspe/pandoc-tree/issues"
+  },
+  "homepage": "https://github.com/lggruspe/pandoc-tree#readme"
+}
