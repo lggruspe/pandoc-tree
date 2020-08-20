@@ -64,6 +64,8 @@ class Citation {
         assert(typeof note_num === 'number')
         assert(typeof hash === 'number')
         assert(typeof mode === 'string')
+        assert(prefix instanceof Array)
+        assert(suffix instanceof Array)
         this.id = id
         this.mode = mode // citation mode
         this.prefix = prefix // list of Inlines?
@@ -88,8 +90,8 @@ class Citation {
         return new Citation(
             object.citationId,
             object.citationMode.t,
-            object.citationPrefix,
-            object.citationSuffix,
+            object.citationPrefix.map(fromJSON),
+            object.citationSuffix.map(fromJSON),
             object.citationNoteNum,
             object.citationHash
         )
