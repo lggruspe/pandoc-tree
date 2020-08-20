@@ -113,7 +113,7 @@ class BlockQuote {
 
     static from (object) {
         assert(object.t === 'BlockQuote')
-        return new BlockQuote(object.c)
+        return new BlockQuote(object.c.map(fromJSON))
     }
 }
 
@@ -131,7 +131,7 @@ class BulletList {
 
     static from (object) {
         assert(object.t === 'BulletList')
-        return new BulletList(object.c)
+        return new BulletList(object.c.map(fromJSON))
     }
 }
 
@@ -187,7 +187,7 @@ class DefinitionList {
     static from (object) {
         // TODO
         assert(object.t === 'DefinitionList')
-        return new DefinitionList(object.c)
+        return new DefinitionList(object.c.fromJSON)
     }
 }
 
@@ -226,7 +226,7 @@ class Div {
         assert(object.c instanceof Array)
         assert(object.c.length === 2)
         const [attr, content] = object.c
-        return new Div(content, Attr.from(attr))
+        return new Div(content.map(fromJSON), Attr.from(attr))
     }
 }
 
@@ -271,7 +271,7 @@ class Header {
         assert(object.c instanceof Array)
         assert(object.c.length === 3)
         const [level, attr, content] = object.c
-        return new Header(level, content, Attr.from(attr))
+        return new Header(level, content.map(fromJSON), Attr.from(attr))
     }
 }
 
@@ -298,7 +298,7 @@ class LineBlock {
 
     static from (object) {
         assert(object.t === 'LineBlock')
-        return new LineBlock(object.c)
+        return new LineBlock(object.c.map(fromJSON))
     }
 }
 
@@ -361,7 +361,7 @@ class OrderedList {
         assert(object.c instanceof Array)
         assert(object.c.length === 2)
         const [listAttributes, items] = object.c
-        return new OrderedList(items, ListAttributes.from(listAttributes))
+        return new OrderedList(items.map(list => list.map(fromJSON)), ListAttributes.from(listAttributes))
     }
 }
 
@@ -377,7 +377,7 @@ class Para {
 
     static from (object) {
         assert(object.t === 'Para')
-        return new Para(object.c)
+        return new Para(object.c.map(fromJSON))
     }
 }
 
@@ -393,7 +393,7 @@ class Plain {
 
     static from (object) {
         assert(object.t === 'Plain')
-        return new Plain(object.c)
+        return new Plain(object.c.map(fromJSON))
     }
 }
 
@@ -464,7 +464,7 @@ class Cite {
         assert(object.c instanceof Array)
         assert(object.c.length === 2)
         const [content, citations] = object.c
-        return new Cite(content, citations.map(c => Citation.from(c)))
+        return new Cite(content.map(fromJSON), citations.map(c => Citation.from(c)))
     }
 }
 
@@ -518,7 +518,7 @@ class Emph {
 
     static from (object) {
         assert(object.t === 'Emph')
-        return new Emph(object.c)
+        return new Emph(object.c.map(fromJSON))
     }
 }
 
@@ -568,7 +568,7 @@ class Image {
         assert(object.c.length === 3)
         const [attr, caption, target] = object.c
         const [src, title] = target
-        return new Image(caption, src, title, Attr.from(attr))
+        return new Image(caption.map(fromJSON), src, title, Attr.from(attr))
     }
 }
 
@@ -629,7 +629,7 @@ class Link {
         assert(object.c.length === 3)
         const [attr, content, target] = object.c
         const [src, title] = target
-        return new Link(content, src, title, Attr.from(attr))
+        return new Link(content.map(fromJSON), src, title, Attr.from(attr))
     }
 }
 
@@ -663,7 +663,7 @@ class Note {
 
     static from (object) {
         assert(object.t === 'Note')
-        return new Note(object.c)
+        return new Note(object.c.map(fromJSON))
     }
 }
 
@@ -688,7 +688,7 @@ class Quoted {
     static from (object) {
         assert(object.t === 'Quoted')
         const [{t: quotetype}, content] = object.c
-        return new Quoted(quotetype, content)
+        return new Quoted(quotetype, content.map(fromJSON))
     }
 }
 
@@ -722,7 +722,7 @@ class SmallCaps {
 
     static from (object) {
         assert(object.t === 'SmallCaps')
-        return new SmallCaps(object.c)
+        return new SmallCaps(object.c.map(fromJSON))
     }
 }
 
@@ -784,7 +784,7 @@ class Span {
     static from (object) {
         assert(object.t === 'Span')
         const [attr, content] = object.c
-        return new Span(content, Attr.from(attr))
+        return new Span(content.map(fromJSON), Attr.from(attr))
     }
 }
 
@@ -816,7 +816,7 @@ class Strikeout {
 
     static from (object) {
         assert(object.t === 'Strikeout')
-        return new Strikeout(object.c)
+        return new Strikeout(object.c.map(fromJSON))
     }
 }
 
@@ -832,7 +832,7 @@ class Strong {
 
     static from (object) {
         assert(object.t === 'Strong')
-        return new Strong(object.c)
+        return new Strong(object.c.map(fromJSON))
     }
 }
 
@@ -848,7 +848,7 @@ class Subscript {
 
     static from (object) {
         assert(object.t === 'Subscript')
-        return new Subscript(object.c)
+        return new Subscript(object.c.map(fromJSON))
     }
 }
 
@@ -864,7 +864,7 @@ class Superscript {
 
     static from (object) {
         assert(object.t === 'Superscript')
-        return new Superscript(object.c)
+        return new Superscript(object.c.map(fromJSON))
     }
 }
 
