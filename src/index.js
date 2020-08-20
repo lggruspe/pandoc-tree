@@ -138,7 +138,7 @@ function walk (elem, filter) {
             return apply(elem, filter)
         }
         case 'Quoted': {
-            walkAll(elem.c)
+            walkAll(elem.c[1], filter)
             return apply(elem, filter)
         }
         case 'Cite': {
