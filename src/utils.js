@@ -1,3 +1,5 @@
+import { Div, Header } from './types.js'
+
 function stringify (elem) {
     if (elem == null) return ''
 
@@ -94,6 +96,37 @@ function stringify (elem) {
     }
 }
 
+function findTopLevelHeader (blocks, start = 0, end = null) {
+    if (end == null || end > blocks.length) {
+        end = blocks.length
+    }
+    for (let i = start; i < end; i++) {
+        const block = blocks[i]
+        if (block instanceof Header && block.level === 1) {
+            return i
+        }
+    }
+    return end
+}
+
+function makeTopLevelSections (blocks, f) {
+    // f is a function that takes a Header and returns an Attr for the
+    // parent Div.
+    let i = -1
+    while (i < blocks.length) {
+        i++
+
+        const block = blocks[i]
+        if (block.t !== 'Header') continue
+        const j = findTopLevelHeader(blocks, i + 1)
+
+        const div = new Div(blocks.slice(i, j), f(block))
+        blocks.splice(i, j - i, div)
+    }
+    return blocks
+}
+
 export {
+    makeTopLevelSections,
     stringify
 }
