@@ -95,7 +95,9 @@ function walk (elem, filter) {
             return apply(elem, filter)
         }
         case 'BulletList': {
-            walkAll(elem.c[0], filter)
+            for (const item of elem.c) {
+                walkAll(item, filter)
+            }
             return apply(elem, filter)
         }
         case 'DefinitionList': {

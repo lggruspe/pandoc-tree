@@ -158,7 +158,8 @@ class BulletList {
 
     static from (object) {
         assert(object.t === 'BulletList')
-        return new BulletList(object.c.map(fromJSON))
+        assert(object.c instanceof Array)
+        return new BulletList(object.c.map(list => list.map(fromJSON)))
     }
 }
 
