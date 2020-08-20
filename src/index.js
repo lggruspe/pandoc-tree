@@ -48,7 +48,6 @@ function walkAll (elems, filter) {
 
 function walk (elem, filter) {
     assert(elem != null)
-    assert(typeof elem.t === 'string')
 
     switch (elem.t) {
         // MetaValues
@@ -96,9 +95,7 @@ function walk (elem, filter) {
             return apply(elem, filter)
         }
         case 'BulletList': {
-            for (const list of elem.c[0]) {
-                walkAll(list, filter)
-            }
+            walkAll(elem.c[0], filter)
             return apply(elem, filter)
         }
         case 'DefinitionList': {
