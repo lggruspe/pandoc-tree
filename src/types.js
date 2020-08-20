@@ -8,10 +8,10 @@ function json (tag, content) {
 }
 
 class Attr {
-    constructor (identifier = '', classes = [], attributes = []) {
+    constructor (identifier = '', classes = [], attributes = {}) {
         assert(typeof identifier === 'string')
         assert(classes instanceof Array)
-        assert(attributes instanceof Array)
+        assert(typeof attributes === 'object')
         this.identifier = identifier
         this.classes = classes // list of strings
         this.attributes = attributes // table/list of key-values (both strings)
@@ -21,14 +21,15 @@ class Attr {
        return [
             this.identifier,
             this.classes,
-            this.attributes
+            Object.entries(this.attributes)
         ]
     }
 
     static from (object) {
         assert(object instanceof Array)
         assert(object.length === 3)
-        return new Attr(...object)
+        const [id, classes, attrs] = object
+        return new Attr(id, classes, Object.fromEntries(attrs))
     }
 }
 
