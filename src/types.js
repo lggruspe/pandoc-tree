@@ -8,22 +8,26 @@ function json (tag, content) {
 }
 
 class Pandoc {
-    constructor (blocks = [], meta = {}) {
+    constructor (blocks = [], meta = {}, version = [1, 21]) {
         assert(blocks instanceof Array)
         assert(typeof meta === 'object')
         this.blocks = blocks
         this.meta = meta
+        this.version = version
     }
 
     get json () {
         return {
             blocks: this.blocks.map(block => block.json),
-            meta: this.meta // TODO
+            meta: this.meta, // TODO
+            'pandoc-api-version': this.version
         }
     }
 
     static from (object) {
-        return new Pandoc(object.blocks, object.meta)
+        assert(typeof object === 'object')
+        const { blocks, meta, 'pandoc-api-version': version } = object
+        return new Pandoc(blocks.map(fromJSON), meta, version)
     }
 }
 
@@ -656,19 +660,22 @@ class Link {
 
 class Math {
     constructor (mathtype, text) {
-        assert(typeof mathtype === 'string')
-        assert(typeof text === 'string')
+        assert.strictEqual(typeof mathtype, 'string')
+        assert.strictEqual(typeof text, 'string')
         this.mathtype = mathtype
         this.text = text
     }
 
     get json () {
-        return json('Math', [this.mathtype, this.text])
+        return json('Math', [{ t: this.mathtype }, this.text])
     }
 
     static from (object) {
         assert(object.t === 'Math')
-        return new Math(...object.c)
+        assert(object.c instanceof Array)
+        assert(object.c.length === 2)
+        const [{ t: mathtype }, text] = object.c
+        return new Math(mathtype, text)
     }
 }
 
