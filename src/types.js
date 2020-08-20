@@ -677,7 +677,9 @@ class Quoted {
 
     get json () {
         const content = [
-            this.quotetype,
+            {
+                t: this.quotetype,
+            },
             this.content.map(inline => inline.json)
         ]
         return json('Quoted', content)
@@ -685,7 +687,8 @@ class Quoted {
 
     static from (object) {
         assert(object.t === 'Quoted')
-        return new Quoted(...object.c)
+        const [{t: quotetype}, content] = object.c
+        return new Quoted(quotetype, content)
     }
 }
 

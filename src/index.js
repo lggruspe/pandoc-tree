@@ -25,7 +25,7 @@ function apply (elem, filter) {
     const f = filter[elem.t]
     if (!f) return elem
     const output = f(elem)
-    return output || elem
+    return output == null ? elem : output
 }
 
 function walkAll (elems, filter) {
