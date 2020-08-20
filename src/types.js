@@ -24,6 +24,12 @@ class Attr {
             this.attributes
         ]
     }
+
+    static from (object) {
+        assert(object instanceof Array)
+        assert(object.length === 3)
+        return new Attr(...object)
+    }
 }
 
 class Citation {
@@ -32,8 +38,9 @@ class Citation {
         assert(typeof id === 'string')
         assert(typeof note_num === 'number')
         assert(typeof hash === 'number')
+        assert(typeof mode === 'string')
         this.id = id
-        this.mode = mode // citation mode?
+        this.mode = mode // citation mode
         this.prefix = prefix // list of Inlines?
         this.suffix = suffix // list of Inlines?
         this.note_num = note_num
@@ -41,15 +48,26 @@ class Citation {
     }
 
     get json () {
-        const content = [
-            this.id,
-            this.prefix.map(inline => inline.json),
-            this.suffix.map(inline => inline.json),
-            this.mode,
-            this.note_num,
-            this.hash
-        ]
-        return json('Citation', content)
+        return {
+            citationId: this.id,
+            citationPrefix: this.prefix.map(inline => inline.json),
+            citationSuffix: this.suffix.map(inline => inline.json),
+            citationMode: { t: this.mode },
+            citationNoteNum: this.note_num,
+            citationHash: this.hash
+        }
+    }
+
+    static from (object) {
+        assert(typeof object === 'object')
+        return new Citation(
+            object.citationId,
+            object.citationMode.t,
+            object.citationPrefix,
+            object.citationSuffix,
+            object.citationNoteNum,
+            object.citationhash
+        )
     }
 }
 
@@ -61,6 +79,21 @@ class ListAttributes {
         this.start = start
         this.style = style
         this.delimiter = delimiter
+    }
+
+    get json () {
+        return [
+            this.start,
+            {t: this.style},
+            {t: this.delimiter}
+        ]
+    }
+
+    static from (object) {
+        assert(object instanceof Array)
+        assert(object.length === 3)
+        const [start, {t: style}, {t: delimiter}] = object
+        return new ListAttributes(start, style, delimiter)
     }
 }
 
@@ -77,6 +110,11 @@ class BlockQuote {
         const content = this.content.map(block => block.json)
         return json('BlockQuote', content)
     }
+
+    static from (object) {
+        assert(object.t === 'BlockQuote')
+        return new BlockQuote(object.c)
+    }
 }
 
 class BulletList {
@@ -89,6 +127,11 @@ class BulletList {
     get json() {
         const content = this.content.map(list => list.map(block => block.json))
         return json('BulletList', content)
+    }
+
+    static from (object) {
+        assert(object.t === 'BulletList')
+        return new BulletList(object.c)
     }
 }
 
@@ -120,6 +163,14 @@ class CodeBlock {
     get json() {
         return json('CodeBlock', [this.attr.json, this.text])
     }
+
+    static from (object) {
+        assert(object.t === 'CodeBlock')
+        assert(object.c instanceof Array)
+        assert(object.c.length() === 2)
+        const [attr, text] = object.c
+        return new CodeBlock(text, Attr.from(attr))
+    }
 }
 
 class DefinitionList {
@@ -131,6 +182,12 @@ class DefinitionList {
     get json() {
         // TODO
         return json('DefinitionList')
+    }
+
+    static from (object) {
+        // TODO
+        assert(object.t === 'DefinitionList')
+        return new DefinitionList(object.c)
     }
 }
 
@@ -162,6 +219,14 @@ class Div {
     get json () {
         const content = this.content.map(block => block.json)
         return json('Div', content)
+    }
+
+    static from (object) {
+        assert(object.t === 'Div')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 2)
+        const [attr, content] = object.c
+        return new Div(content, Attr.from(attr))
     }
 }
 
@@ -200,11 +265,24 @@ class Header {
         ]
         return json('Header', content)
     }
+
+    static from (object) {
+        assert(object.t === 'Header')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 3)
+        const [level, attr, content] = object.c
+        return new Header(level, content, Attr.from(attr))
+    }
 }
 
 class HorizontalRule {
     get json() {
         return json('HorizontalRule')
+    }
+
+    static from (object) {
+        assert(object.t === 'HorizontalRule')
+        return new HorizontalRule()
     }
 }
 
@@ -217,16 +295,26 @@ class LineBlock {
         const content = this.content.map(list => list.map(inline => inline.json))
         return json('LineBlock', content)
     }
+
+    static from (object) {
+        assert(object.t === 'LineBlock')
+        return new LineBlock(object.c)
+    }
 }
 
 class Null {
     get json () {
         return json('Null')
     }
+
+    static from (object) {
+        assert(object.t === 'Null')
+        return new Null()
+    }
 }
 
 class OrderedList {
-    constructor (items, listAttributes = ListAttributes()) {
+    constructor (items, listAttributes = new ListAttributes()) {
         assert(items instanceof Array)
         assert(listAttributes instanceof ListAttributes)
         this.items = items // list of list of Blocks
@@ -267,6 +355,14 @@ class OrderedList {
         ]
         return json('OrderedList', content)
     }
+
+    static from (object) {
+        assert(object.t === 'OrderedList')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 2)
+        const [listAttributes, items] = object.c
+        return new OrderedList(items, ListAttributes.from(listAttributes))
+    }
 }
 
 class Para {
@@ -278,6 +374,11 @@ class Para {
     get json () {
         return json('Para', this.content.map(inline => inline.json))
     }
+
+    static from (object) {
+        assert(object.t === 'Para')
+        return new Para(object.c)
+    }
 }
 
 class Plain {
@@ -288,6 +389,11 @@ class Plain {
 
     get json () {
         return json('Plain', this.content.map(inline => inline.json))
+    }
+
+    static from (object) {
+        assert(object.t === 'Plain')
+        return new Plain(object.c)
     }
 }
 
@@ -301,6 +407,11 @@ class RawBlock {
 
     get json () {
         return json('RawBlock', [this.format, this.text])
+    }
+
+    static from (object) {
+        assert(object.t === 'RawBlock')
+        return new RawBlock(...object.c)
     }
 }
 
@@ -322,6 +433,12 @@ class Table {
         // TODO
         return json('Table')
     }
+
+    static from (object) {
+        // TODO
+        assert(object.t === 'Table')
+        return new Table()
+    }
 }
 
 // Inlines
@@ -340,6 +457,14 @@ class Cite {
             this.content.map(inline => inline.json)
         ]
         return json('Cite', content)
+    }
+
+    static from (object) {
+        assert(object.t === Cite)
+        assert(object.c instanceof Array)
+        assert(object.c.length === 2)
+        const [content, citations] = object.c
+        return new Cite(content, citations.map(c => Citation.from(c)))
     }
 }
 
@@ -371,6 +496,14 @@ class Code {
     get json () {
         return json('Code', [this.attr.json, this.text])
     }
+
+    static from (object) {
+        assert(object.t === 'Code')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 2)
+        const [attr, text] = object.c
+        return new Code(text, Attr.from(attr))
+    }
 }
 
 class Emph {
@@ -381,6 +514,11 @@ class Emph {
 
     get json () {
         return json('Emph', this.content.map(inline => inline.json))
+    }
+
+    static from (object) {
+        assert(object.t === 'Emph')
+        return new Emph(object.c)
     }
 }
 
@@ -416,15 +554,32 @@ class Image {
         const content = [
             this.attr.json,
             this.caption.map(inline => inline.json),
-            this.src,
+            [
+                this.src,
+                this.title
+            ]
         ]
         return json('Image', content)
+    }
+
+    static from (object) {
+        assert(object.t === 'Image')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 3)
+        const [attr, caption, target] = object.c
+        const [src, title] = target
+        return new Image(caption, src, title, Attr.from(attr))
     }
 }
 
 class LineBreak {
     get json () {
         return json('LineBreak')
+    }
+
+    static from (object) {
+        assert(object.t === 'LineBreak')
+        return new LineBreak()
     }
 }
 
@@ -435,7 +590,7 @@ class Link {
         assert(typeof target === 'string')
         this.content = content // list of Inlines
         this.target = target
-        this.title = title // string??? TODO put in json
+        this.title = title // string?
         this.attr = attr
     }
 
@@ -467,6 +622,15 @@ class Link {
         ]
         return json('Link', content)
     }
+
+    static from (object) {
+        assert(object.t === 'Link')
+        assert(object.c instanceof Array)
+        assert(object.c.length === 3)
+        const [attr, content, target] = object.c
+        const [src, title] = target
+        return new Link(content, src, title, Attr.from(attr))
+    }
 }
 
 class Math {
@@ -480,6 +644,11 @@ class Math {
     get json () {
         return json('Math', [this.mathtype, this.text])
     }
+
+    static from (object) {
+        assert(object.t === 'Math')
+        return new Math(...object.c)
+    }
 }
 
 class Note {
@@ -490,6 +659,11 @@ class Note {
 
     get json () {
         return json('Note', this.content.map(block => block.json))
+    }
+
+    static from (object) {
+        assert(object.t === 'Note')
+        return new Note(object.c)
     }
 }
 
@@ -508,6 +682,11 @@ class Quoted {
         ]
         return json('Quoted', content)
     }
+
+    static from (object) {
+        assert(object.t === 'Quoted')
+        return new Quoted(...object.c)
+    }
 }
 
 class RawInline {
@@ -521,6 +700,11 @@ class RawInline {
     get json () {
         return json('RawInline', [this.format, this.text])
     }
+
+    static from (object) {
+        assert(object.t === 'RawInline')
+        return new RawInline(...object.c)
+    }
 }
 
 class SmallCaps {
@@ -532,17 +716,32 @@ class SmallCaps {
     get json () {
         return json('SmallCaps', this.content.map(inline => inline.json))
     }
+
+    static from (object) {
+        assert(object.t === 'SmallCaps')
+        return new SmallCaps(object.c)
+    }
 }
 
 class SoftBreak {
     get json () {
         return json('SoftBreak')
     }
+
+    static from (object) {
+        assert(object.t === 'SoftBreak')
+        return new SoftBreak()
+    }
 }
 
 class Space {
     get json () {
         return json('Space')
+    }
+
+    static from (object) {
+        assert(object.t === 'Space')
+        return new Space()
     }
 }
 
@@ -578,6 +777,12 @@ class Span {
         ]
         return json('Span', content)
     }
+
+    static from (object) {
+        assert(object.t === 'Span')
+        const [attr, content] = object.c
+        return new Span(content, Attr.from(attr))
+    }
 }
 
 class Str {
@@ -605,6 +810,11 @@ class Strikeout {
     get json () {
         return json('Strikeout', this.content.map(inline => inline.json))
     }
+
+    static from (object) {
+        assert(object.t === 'Strikeout')
+        return new Strikeout(object.c)
+    }
 }
 
 class Strong {
@@ -615,6 +825,11 @@ class Strong {
 
     get json () {
         return json('Strong', this.content.map(inline => inline.json))
+    }
+
+    static from (object) {
+        assert(object.t === 'Strong')
+        return new Strong(object.c)
     }
 }
 
@@ -627,6 +842,11 @@ class Subscript {
     get json () {
         return json('Subscript', this.content.map(inline => inline.json))
     }
+
+    static from (object) {
+        assert(object.t === 'Subscript')
+        return new Subscript(object.c)
+    }
 }
 
 class Superscript {
@@ -637,6 +857,11 @@ class Superscript {
 
     get json () {
         return json('Superscript', this.content.map(inline => inline.json))
+    }
+
+    static from (object) {
+        assert(object.t === 'Superscript')
+        return new Superscript(object.c)
     }
 }
 
