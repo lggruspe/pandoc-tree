@@ -175,6 +175,10 @@ function applyFilter (doc, filter) {
     for (const m of Object.values(doc.meta)) {
         walk(m, filter)
     }
+    if (filter.Pandoc) {
+        const document = filter.Pandoc(doc)
+        if (document != null) doc = document
+    }
     return doc
 }
 
