@@ -102,7 +102,7 @@ class ListAttributes {
     constructor (start = 1, style = 'DefaultStyle', delimiter = 'DefaultDelim') {
         assert(typeof start === 'number')
         assert(typeof style === 'string')
-        assert(typeof delimeter === 'string')
+        assert(typeof delimiter === 'string')
         this.start = start
         this.style = style
         this.delimiter = delimiter
@@ -195,7 +195,7 @@ class CodeBlock {
     static from (object) {
         assert(object.t === 'CodeBlock')
         assert(object.c instanceof Array)
-        assert(object.c.length() === 2)
+        assert(object.c.length === 2)
         const [attr, text] = object.c
         return new CodeBlock(text, Attr.from(attr))
     }
@@ -208,14 +208,22 @@ class DefinitionList {
     }
 
     get json() {
-        // TODO
-        return json('DefinitionList')
+        const items = this.content.map(([term, def]) => {
+            const inlines = term.map(inline => inline.json)
+            const blocks = def.map(list => list.map(block => block.json))
+            return [inlines, blocks]
+        })
+        return json('DefinitionList', items)
     }
 
     static from (object) {
-        // TODO
         assert(object.t === 'DefinitionList')
-        return new DefinitionList(object.c.fromJSON)
+        const content = object.c.map(([term, def]) => {
+            const inlines = term.map(fromJSON)
+            const blocks = def.map(list => list.map(fromJSON))
+            return [inlines, blocks]
+        })
+        return new DefinitionList(content)
     }
 }
 
@@ -342,10 +350,10 @@ class Null {
 }
 
 class OrderedList {
-    constructor (items, listAttributes = new ListAttributes()) {
-        assert(items instanceof Array)
+    constructor (content, listAttributes = new ListAttributes()) {
+        assert(content instanceof Array)
         assert(listAttributes instanceof ListAttributes)
-        this.items = items // list of list of Blocks
+        this.content = content // list of list of Blocks
         this.listAttributes = listAttributes
     }
 
@@ -444,28 +452,20 @@ class RawBlock {
 }
 
 class Table {
-    constructor (caption, aligns, widths, headers, rows) {
-        assert(caption instanceof Array)
-        assert(aligns instanceof Array)
-        assert(widths instanceof widths)
-        assert(headers instanceof Array)
-        assert(rows instanceof Array)
-        this.caption = caption // list of Inlines
-        this.aligns = aligns // list of Alignments
-        this.widths = widths
-        this.headers = headers // list of table cells
-        this.rows = rows // list of lists of table cells
+    // TODO
+    constructor (object) {
+        this.object = object
     }
 
     get json () {
-        // TODO
-        return json('Table')
+        return this.object
     }
 
     static from (object) {
-        // TODO
         assert(object.t === 'Table')
-        return new Table()
+        assert(object.c instanceof Array)
+        assert(object.c.length === 6)
+        return new Table(object)
     }
 }
 
