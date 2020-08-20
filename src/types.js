@@ -66,7 +66,7 @@ class Citation {
             object.citationPrefix,
             object.citationSuffix,
             object.citationNoteNum,
-            object.citationhash
+            object.citationHash
         )
     }
 }
@@ -460,10 +460,10 @@ class Cite {
     }
 
     static from (object) {
-        assert(object.t === Cite)
+        assert(object.t === 'Cite')
         assert(object.c instanceof Array)
         assert(object.c.length === 2)
-        const [content, citations] = object.c
+        const [citations, content] = object.c
         return new Cite(content.map(fromJSON), citations.map(c => Citation.from(c)))
     }
 }

@@ -142,7 +142,6 @@ function walk (elem, filter) {
             return apply(elem, filter)
         }
         case 'Cite': {
-            walkAll(elem.c[0], filter)
             walkAll(elem.c[1], filter)
             return apply(elem, filter)
         }
