@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-import { Link, Str } from './types.js'
-import { interact } from './index.js'
+import { Link } from './types.js'
+import { interact, toJSONFilter } from './index.js'
 
 const filter = {}
 
 filter.Str = function (elem) {
-    const str = Str.from(elem)
-    return new Link([str], '#').json
+    return new Link([elem], '#')
 }
 
-interact(filter)
+interact(toJSONFilter(filter))

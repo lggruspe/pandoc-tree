@@ -1,4 +1,5 @@
 import { strict as assert } from 'assert'
+import { fromJSON } from './types.js'
 
 function interact (filter) {
     const chunks = []
@@ -181,7 +182,24 @@ function applyFilter (doc, filter) {
     return doc
 }
 
+function toJSONFunction (f) {
+    return function (elem) {
+        const input = fromJSON(elem)
+        const output = f(input)
+        if (output != null) return output.json
+    }
+}
+
+function toJSONFilter (filter) {
+    const jsonFilter = {}
+    for (const [k, v] of Object.entries(filter)) {
+        jsonFilter[k] = toJSONFunction(v)
+    }
+    return jsonFilter
+}
+
 export {
     applyFilter,
     interact,
+    toJSONFilter,
 }

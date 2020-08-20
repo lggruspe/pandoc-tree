@@ -865,6 +865,48 @@ class Superscript {
     }
 }
 
+function fromJSON (object) {
+    assert(typeof object === 'object')
+    assert(typeof object.t === 'string')
+    switch (object.t) {
+        case 'BlockQuote': return BlockQuote.from(object)
+        case 'BulletList': return BulletList.from(object)
+        case 'CodeBlock': return CodeBlock.from(object)
+        case 'DefinitionList': return DefinitionList.from(object)
+        case 'Div': return Div.from(object)
+        case 'Header': return Header.from(object)
+        case 'HorizontalRule': return HorizontalRule.from(object)
+        case 'LineBlock': return LineBlock.from(object)
+        case 'Null': return Null.from(object)
+        case 'OrderedList': return OrderedList.from(object)
+        case 'Para': return Para.from(object)
+        case 'Plain': return Plain.from(object)
+        case 'RawBlock': return RawBlock.from(object)
+        case 'Table': return Table.from(object)
+        case 'Cite': return Cite.from(object)
+        case 'Code': return Code.from(object)
+        case 'Emph': return Emph.from(object)
+        case 'Image': return Image.from(object)
+        case 'LineBreak': return LineBreak.from(object)
+        case 'Link': return Link.from(object)
+        case 'Math': return Math.from(object)
+        case 'Note': return Note.from(object)
+        case 'Quoted': return Quoted.from(object)
+        case 'RawInline': return RawInline.from(object)
+        case 'SmallCaps': return SmallCaps.from(object)
+        case 'SoftBreak': return SoftBreak.from(object)
+        case 'Space': return Space.from(object)
+        case 'Span': return Span.from(object)
+        case 'Str': return Str.from(object)
+        case 'Strikeout': return Strikeout.from(object)
+        case 'Strong': return Strong.from(object)
+        case 'Subscript': return Subscript.from(object)
+        case 'Superscript': return Superscript.from(object)
+        default:
+            assert(false)
+    }
+}
+
 export {
     Attr,
     Citation,
@@ -904,4 +946,6 @@ export {
     Strong,
     Subscript,
     Superscript,
+
+    fromJSON
 }
