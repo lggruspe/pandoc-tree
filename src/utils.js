@@ -112,16 +112,15 @@ function findTopLevelHeader (blocks, start = 0, end = null) {
 function makeTopLevelSections (blocks, f) {
     // f is a function that takes a Header and returns an Attr for the
     // parent Div.
-    let i = -1
-    while (i < blocks.length) {
-        i++
-
+    for (let i = 0; i < blocks.length; i++) {
         const block = blocks[i]
         if (block.t !== 'Header') continue
         const j = findTopLevelHeader(blocks, i + 1)
-
-        const div = new Div(blocks.slice(i, j), f(block))
-        blocks.splice(i, j - i, div)
+        if (i < j) {
+            let div = new Div([], f(block))
+            const slice = blocks.splice(i, j - i, div)
+            div.content = slice
+        }
     }
     return blocks
 }
