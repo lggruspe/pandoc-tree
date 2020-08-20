@@ -7,6 +7,26 @@ function json (tag, content) {
     }
 }
 
+class Pandoc {
+    constructor (blocks = [], meta = {}) {
+        assert(blocks instanceof Array)
+        assert(typeof meta === 'object')
+        this.blocks = blocks
+        this.meta = meta
+    }
+
+    get json () {
+        return {
+            blocks: this.blocks.map(block => block.json),
+            meta: this.meta // TODO
+        }
+    }
+
+    static from (object) {
+        return new Pandoc(object.blocks, object.meta)
+    }
+}
+
 class Attr {
     constructor (identifier = '', classes = [], attributes = {}) {
         assert(typeof identifier === 'string')
@@ -871,7 +891,6 @@ class Superscript {
 
 function fromJSON (object) {
     assert(typeof object === 'object')
-    assert(typeof object.t === 'string')
     switch (object.t) {
         case 'BlockQuote': return BlockQuote.from(object)
         case 'BulletList': return BulletList.from(object)
@@ -907,6 +926,9 @@ function fromJSON (object) {
         case 'Subscript': return Subscript.from(object)
         case 'Superscript': return Superscript.from(object)
         default:
+            if (object.meta != null && object.blocks instanceof Array) {
+                return Pandoc.from(object)
+            }
             assert(false)
     }
 }
