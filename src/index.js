@@ -1,7 +1,7 @@
 import { strict as assert } from 'assert'
 import { fromJSON } from './types.js'
 
-function interact (filter) {
+function interact () {
     const chunks = []
     const readable = process.stdin
     readable.on('readable', () => {
@@ -13,9 +13,12 @@ function interact (filter) {
     })
     readable.on('end', () => {
         const content = chunks.join('')
-        const doc = JSON.parse(content)
-        const output = applyFilter(doc, filter)
-        console.log(JSON.stringify(output))
+        let doc = JSON.parse(content)
+        for (let i = 0; i < arguments.length; i++) {
+            const filter = arguments[i]
+            doc = applyFilter(doc, filter)
+        }
+        console.log(JSON.stringify(doc))
     })
 }
 
