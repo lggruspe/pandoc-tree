@@ -207,4 +207,5 @@ export {
     applyFilter,
     interact,
     toJSONFilter,
+    walk
 }
