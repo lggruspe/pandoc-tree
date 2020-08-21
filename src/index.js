@@ -51,7 +51,6 @@ function walkAll (elems, filter) {
 
 function walk (elem, filter) {
     assert(elem != null)
-
     switch (elem.t) {
         // MetaValues
         case 'MetaMap': {
@@ -207,5 +206,5 @@ export {
     applyFilter,
     interact,
     toJSONFilter,
-    walk
+    walkAll
 }
