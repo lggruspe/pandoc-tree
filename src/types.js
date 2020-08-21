@@ -231,7 +231,7 @@ class Div {
     constructor (content, attr = new Attr()) {
         assert(content instanceof Array)
         assert(attr instanceof Attr)
-        this.content // list of Blocks
+        this.content = content // list of Blocks
         this.attr = attr
     }
 
@@ -254,7 +254,7 @@ class Div {
 
     get json () {
         const content = this.content.map(block => block.json)
-        return json('Div', content)
+        return json('Div', [this.attr.json, content])
     }
 
     static from (object) {
