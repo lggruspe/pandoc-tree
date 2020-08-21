@@ -114,7 +114,7 @@ function makeTopLevelSections (blocks, f) {
     // parent Div.
     for (let i = 0; i < blocks.length; i++) {
         const block = blocks[i]
-        if (block.t !== 'Header') continue
+        if (!(block instanceof Header)) continue
         const j = findTopLevelHeader(blocks, i + 1)
         if (i < j) {
             let div = new Div([], f(block))
