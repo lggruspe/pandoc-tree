@@ -175,7 +175,7 @@ function walk (elem, filter) {
 }
 
 function applyFilter (doc, filter) {
-  walkAll(doc.blocks, filter)
+  doc.blocks = walkAll(doc.blocks, filter)
   for (const m of Object.values(doc.meta)) {
     walk(m, filter)
   }
@@ -190,6 +190,7 @@ function toJSONFunction (f) {
   return function (elem) {
     const input = fromJSON(elem)
     const output = f(input)
+    if (output instanceof Array) return output.map(elem => elem.json)
     if (output != null) return output.json
   }
 }
