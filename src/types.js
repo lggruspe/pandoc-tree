@@ -45,7 +45,7 @@ class Attr {
     return [
       this.identifier,
       this.classes,
-      Object.entries(this.attributes)
+      Object.entries(this.attributes).filter(([_, v]) => v != null)
     ]
   }
 
