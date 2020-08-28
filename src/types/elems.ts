@@ -9,12 +9,12 @@ export enum Alignment {
 export type Attr = [string, Array<string>, Array<[string, string]>]
 
 export interface Caption {
-  t: 'Caption'
+  readonly t: 'Caption'
   c: [(null | Array<Inline>), Array<Block>]
 }
 
 export interface Cell {
-  t: 'Cell'
+  readonly t: 'Cell'
   c: [
     Attr,
     { t: string }, // Alignment
@@ -40,7 +40,7 @@ export enum CitationMode {
 }
 
 export interface ColSpan {
-  t: 'ColSpan'
+  readonly t: 'ColSpan'
   c: number // integer
 }
 
@@ -89,113 +89,113 @@ export enum QuoteType {
 }
 
 export interface Row {
-  t: 'Row'
+  readonly t: 'Row'
   c: [Attr, Array<Cell>]
 }
 
 export interface RowHeadColumns {
-  t: 'RowHeadColumns'
+  readonly t: 'RowHeadColumns'
   c: number // integer
 }
 
 export interface RowSpan {
-  t: 'RowSpan'
+  readonly t: 'RowSpan'
   c: number // integer
 }
 
 export interface TableHead {
-  t: 'TableHead'
+  readonly t: 'TableHead'
   c: [Attr, Array<Row>]
 }
 
 export interface TableBody {
-  t: 'TableBody'
+  readonly t: 'TableBody'
   c: [Attr, RowHeadColumns, Array<Row>, Array<Row>]
 }
 
 export interface TableFoot {
-  t: 'TableFoot'
+  readonly t: 'TableFoot'
   c: [Attr, Array<Row>]
 }
 
 // Blocks
 
 export interface BlockQuote {
-  t: 'BlockQuote'
+  readonly t: 'BlockQuote'
   c: Array<Block>
   // content
 }
 
 export interface BulletList {
-  t: 'BulletList'
+  readonly t: 'BulletList'
   c: Array<Array<Block>>
   // content
 }
 
 export interface CodeBlock {
-  t: 'CodeBlock'
+  readonly t: 'CodeBlock'
   c: [Attr, string]
   // [attr, text]
 }
 
 export interface DefinitionList {
-  t: 'DefinitionList'
+  readonly t: 'DefinitionList'
   c: Array<[Array<Inline>, Array<Array<Block>>]>
   // content
 }
 
 export interface Div {
-  t: 'Div'
+  readonly t: 'Div'
   c: [Attr, Array<Block>]
   // [attr, content]
 }
 
 export interface Header {
-  t: 'Header'
+  readonly t: 'Header'
   c: [number, Attr, Array<Inline>]
   // [level, attr, content]
 }
 
 export interface HorizontalRule {
-  t: 'HorizontalRule'
+  readonly t: 'HorizontalRule'
 }
 
 export interface LineBlock {
-  t: 'LineBlock'
+  readonly t: 'LineBlock'
   c: Array<Array<Inline>>
   // content
 }
 
 export interface Null {
-  t: 'Null'
+  readonly t: 'Null'
 }
 
 export interface OrderedList {
-  t: 'OrderedList'
+  readonly t: 'OrderedList'
   c: [ListAttributes, Array<Array<Block>>]
   // [listAttributes, content]
 }
 
 export interface Para {
-  t: 'Para'
+  readonly t: 'Para'
   c: Array<Inline>
   // content
 }
 
 export interface Plain {
-  t: 'Plain'
+  readonly t: 'Plain'
   c: Array<Inline>
   // content
 }
 
 export interface RawBlock {
-  t: 'RawBlock'
+  readonly t: 'RawBlock'
   c: [string, string]
   // [format, text]
 }
 
 export interface Table {
-  t: 'Table'
+  readonly t: 'Table'
   c: [Attr, Caption, Array<ColSpec>, TableHead, Array<TableBody>, TableFoot]
   // [attr, caption, colspecs, head, bodies, foot]
 }
@@ -204,41 +204,41 @@ export interface Table {
 
 export interface Cite {
   // [citations, content]
-  t: 'Cite'
+  readonly t: 'Cite'
   c: [Array<Citation>, Array<Inline>]
 }
 
 export interface Code {
   // [attr, text]
-  t: 'Code'
+  readonly t: 'Code'
   c: [Attr, string]
 }
 
 export interface Emph {
   // content
-  t: 'Emph'
+  readonly t: 'Emph'
   c: Array<Inline>
 }
 
 export interface Image {
   // [attr, caption, [src, title]]
-  t: 'Image'
+  readonly t: 'Image'
   c: [Attr, Array<Inline>, [string, string]]
 }
 
 export interface LineBreak {
-  t: 'LineBreak'
+  readonly t: 'LineBreak'
 }
 
 export interface Link {
   // [attr, content, [src, title]]
-  t: 'Link'
+  readonly t: 'Link'
   c: [Attr, Array<Inline>, [string, string]]
 }
 
 export interface Math {
   // [mathtype, text]
-  t: 'Math'
+  readonly t: 'Math'
   c: [
     { t: string }, // MathType
     string
@@ -247,13 +247,13 @@ export interface Math {
 
 export interface Note {
   // content
-  t: 'Note'
+  readonly t: 'Note'
   c: Array<Block>
 }
 
 export interface Quoted {
   // [quotetype, content]
-  t: 'Quoted'
+  readonly t: 'Quoted'
   c: [
     { t: string }, // QuoteType
     Array<Inline>
@@ -262,63 +262,63 @@ export interface Quoted {
 
 export interface RawInline {
   // [format, text]
-  t: 'RawInline'
+  readonly t: 'RawInline'
   c: [string, string]
 }
 
 export interface SmallCaps {
   // content
-  t: 'SmallCaps'
+  readonly t: 'SmallCaps'
   c: Array<Inline>
 }
 
 export interface SoftBreak {
-  t: 'SoftBreak'
+  readonly t: 'SoftBreak'
 }
 
 export interface Space {
-  t: 'Space'
+  readonly t: 'Space'
 }
 
 export interface Span {
   // [attr, content]
-  t: 'Span'
+  readonly t: 'Span'
   c: [Attr, Array<Inline>]
 }
 
 export interface Str {
   // text
-  t: 'Str'
+  readonly t: 'Str'
   c: string
 }
 
 export interface Strikeout {
   // content
-  t: 'Strikeout'
+  readonly t: 'Strikeout'
   c: Array<Inline>
 }
 
 export interface Strong {
   // content
-  t: 'Strong'
+  readonly t: 'Strong'
   c: Array<Inline>
 }
 
 export interface Subscript {
   // content
-  t: 'Subscript'
+  readonly t: 'Subscript'
   c: Array<Inline>
 }
 
 export interface Superscript {
   // content
-  t: 'Superscript'
+  readonly t: 'Superscript'
   c: Array<Inline>
 }
 
 export interface Underline {
   // content
-  t: 'Underline'
+  readonly t: 'Underline'
   c: Array<Inline>
 }
 
