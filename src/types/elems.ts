@@ -1,6 +1,23 @@
+export enum Alignment {
+  AlignLeft,
+  AlignRight,
+  AlignCenter,
+  AlignDefault
+}
+
 // identifier, classes, key-value pairs
 export type Attr =
   [string, Array<string>, Array<[string, string]>]
+
+export interface Caption {
+  t: 'Caption'
+  c: [(null | Array<Inline>), Array<Block>]
+}
+
+export interface Cell {
+  t: 'Cell'
+  c: [Attr, Alignment, RowSpan, ColSpan, Array<Block>]
+}
 
 export enum CitationMode {
   AuthorInText,
@@ -15,6 +32,21 @@ export interface Citation {
   citationMode: { t: string }
   citationNoteNum: number
   citationHash: number
+}
+
+export interface ColSpan {
+  t: 'ColSpan'
+  c: number // integer
+}
+
+export type ColSpec = [
+  { t: Alignment },
+  { t: ColWidth }
+]
+
+export enum ColWidth {
+  // ColWidth(number) // not supported
+  ColWidthDefault
 }
 
 export enum ListNumberStyle {
@@ -45,6 +77,36 @@ export enum MathType {
 export enum QuoteType {
   SingleQuote,
   DoubleQuote
+}
+
+export interface Row {
+  t: 'Row'
+  c: [Attr, Array<Cell>]
+}
+
+export interface RowHeadColumns {
+  t: 'RowHeadColumns'
+  c: number // integer
+}
+
+export interface RowSpan {
+  t: 'RowSpan'
+  c: number // integer
+}
+
+export interface TableHead {
+  t: 'TableHead'
+  c: [Attr, Array<Row>]
+}
+
+export interface TableBody {
+  t: 'TableBody'
+  c: [Attr, RowHeadColumns, Array<Row>, Array<Row>]
+}
+
+export interface TableFoot {
+  t: 'TableFoot'
+  c: [Attr, Array<Row>]
 }
 
 // Blocks
@@ -125,7 +187,7 @@ export interface RawBlock {
 
 export interface Table {
   t: 'Table'
-  c: null // [Attr, ?, Array<?>, ?, Array<?>, ?]
+  c: [Attr, Caption, Array<ColSpec>, TableHead, Array<TableBody>, TableFoot]
   // [attr, caption, colspecs, head, bodies, foot]
 }
 
