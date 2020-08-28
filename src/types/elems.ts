@@ -6,8 +6,7 @@ export enum Alignment {
 }
 
 // identifier, classes, key-value pairs
-export type Attr =
-  [string, Array<string>, Array<[string, string]>]
+export type Attr = [string, Array<string>, Array<[string, string]>]
 
 export interface Caption {
   t: 'Caption'

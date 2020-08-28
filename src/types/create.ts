@@ -1,5 +1,43 @@
 import * as t from './elems'
 
+export function Attr (
+  identifier: string = '',
+  classes: Array<string> = [],
+  attributes: object = {}
+): t.Attr {
+  return [identifier, classes, Object.entries(attributes)]
+}
+
+export function Citation (
+  id: string,
+  mode: t.CitationMode,
+  prefix: Array<t.Inline>,
+  suffix: Array<t.Inline>,
+  noteNum: number,
+  hash: number
+): t.Citation {
+  return {
+    citationId: id,
+    citationPrefix: prefix,
+    citationSuffix: suffix,
+    citationMode: { t: String(mode) },
+    citationNoteNum: noteNum,
+    citationHash: hash
+  }
+}
+
+export function ListAttributes (
+  start: number = 1,
+  style: t.ListNumberStyle = t.ListNumberStyle.DefaultStyle,
+  delimiter: t.ListNumberDelim = t.ListNumberDelim.DefaultDelim
+): t.ListAttributes {
+  return [start, style, delimiter]
+}
+
+export function TableFoot (): t.TableFoot {
+  throw new Error('not implemented')
+}
+
 // Blocks
 
 export function BlockQuote (content: Array<t.Block>): t.BlockQuote {
@@ -16,28 +54,31 @@ export function BulletList (content: Array<Array<t.Block>>): t.BulletList {
   }
 }
 
-export function CodeBlock (attr: t.Attr, text: string): t.CodeBlock {
+export function CodeBlock (text: string, attr: t.Attr = Attr()): t.CodeBlock {
   return {
     t: 'CodeBlock',
     c: [attr, text]
   }
 }
 
-export function DefinitionList (items: Array<[Array<t.Inline>, Array<Array<t.Block>>]>): t.DefinitionList {
+export function DefinitionList (
+  content: Array<[Array<t.Inline>,
+  Array<Array<t.Block>>]>
+): t.DefinitionList {
   return {
     t: 'DefinitionList',
-    c: items
+    c: content
   }
 }
 
-export function Div (attr: t.Attr, content: Array<t.Block>): t.Div {
+export function Div (content: Array<t.Block>, attr: t.Attr = Attr()): t.Div {
   return {
     t: 'Div',
     c: [attr, content]
   }
 }
 
-export function Header (level: number, attr: t.Attr, content: Array<t.Inline>): t.Header {
+export function Header (level: number, content: Array<t.Inline>, attr: t.Attr = Attr()): t.Header {
   return {
     t: 'Header',
     c: [level, attr, content]
@@ -63,7 +104,10 @@ export function Null (): t.Null {
   }
 }
 
-export function OrderedList (listAttributes: t.ListAttributes, content: Array<Array<t.Block>>): t.OrderedList {
+export function OrderedList (
+  content: Array<Array<t.Block>>,
+  listAttributes: t.ListAttributes = ListAttributes()
+): t.OrderedList {
   return {
     t: 'OrderedList',
     c: [listAttributes, content]
@@ -91,20 +135,26 @@ export function RawBlock (format: string, text: string): t.RawBlock {
   }
 }
 
-export function Table (): t.Table {
-  throw new Error('Not implemented')
+export function Table (
+  caption: any,
+  aligns: any,
+  widths: any,
+  headers: any,
+  rows: any
+): t.Table {
+  throw new Error('not implemented')
 }
 
 // Inlines
 
-export function Cite (citations: Array<t.Citation>, content: Array<t.Inline>): t.Cite {
+export function Cite (content: Array<t.Inline>, citations: Array<t.Citation>): t.Cite {
   return {
     t: 'Cite',
     c: [citations, content]
   }
 }
 
-export function Code (attr: t.Attr, text: string): t.Code {
+export function Code (text: string, attr: t.Attr = Attr()): t.Code {
   return {
     t: 'Code',
     c: [attr, text]
@@ -118,7 +168,12 @@ export function Emph (content: Array<t.Inline>): t.Emph {
   }
 }
 
-export function Image (attr: t.Attr, caption: Array<t.Inline>, src: string, title: string): t.Image {
+export function Image (
+  caption: Array<t.Inline>,
+  src: string,
+  title: string = '',
+  attr: t.Attr = Attr()
+): t.Image {
   return {
     t: 'Image',
     c: [attr, caption, [src, title]]
@@ -131,7 +186,12 @@ export function LineBreak (): t.LineBreak {
   }
 }
 
-export function Link (attr: t.Attr, content: Array<t.Inline>, src: string, title: string): t.Link {
+export function Link (
+  content: Array<t.Inline>,
+  src: string,
+  title: string = '',
+  attr: t.Attr = Attr()
+): t.Link {
   return {
     t: 'Link',
     c: [attr, content, [src, title]]
@@ -185,7 +245,7 @@ export function Space (): t.Space {
   }
 }
 
-export function Span (attr: t.Attr, content: Array<t.Inline>): t.Span {
+export function Span (content: Array<t.Inline>, attr: t.Attr = Attr()): t.Span {
   return {
     t: 'Span',
     c: [attr, content]
