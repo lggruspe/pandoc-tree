@@ -15,7 +15,22 @@ export interface Caption {
 
 export interface Cell {
   t: 'Cell'
-  c: [Attr, Alignment, RowSpan, ColSpan, Array<Block>]
+  c: [
+    Attr,
+    { t: string }, // Alignment
+    RowSpan,
+    ColSpan,
+    Array<Block>
+  ]
+}
+
+export interface Citation {
+  citationId: string
+  citationPrefix: Array<Inline>
+  citationSuffix: Array<Inline>
+  citationMode: { t: string } // CitationMode
+  citationNoteNum: number
+  citationHash: number
 }
 
 export enum CitationMode {
@@ -24,23 +39,14 @@ export enum CitationMode {
   NormalCitation
 }
 
-export interface Citation {
-  citationId: string
-  citationPrefix: Array<Inline>
-  citationSuffix: Array<Inline>
-  citationMode: { t: string }
-  citationNoteNum: number
-  citationHash: number
-}
-
 export interface ColSpan {
   t: 'ColSpan'
   c: number // integer
 }
 
 export type ColSpec = [
-  { t: Alignment },
-  { t: ColWidth }
+  { t: string }, // Alignment
+  { t: string } // ColWidth
 ]
 
 export enum ColWidth {
@@ -66,7 +72,11 @@ export enum ListNumberDelim {
 }
 
 // [start, style, delim]
-export type ListAttributes = [ number, ListNumberStyle, ListNumberDelim ]
+export type ListAttributes = [
+  number,
+  { t: string }, // ListNumberStyle
+  { t: string } // ListNumberDelim
+]
 
 export enum MathType {
   DisplayMath,
@@ -229,7 +239,10 @@ export interface Link {
 export interface Math {
   // [mathtype, text]
   t: 'Math'
-  c: [{ t: MathType }, string]
+  c: [
+    { t: string }, // MathType
+    string
+  ]
 }
 
 export interface Note {
@@ -241,7 +254,10 @@ export interface Note {
 export interface Quoted {
   // [quotetype, content]
   t: 'Quoted'
-  c: [{ t: QuoteType }, Array<Inline>]
+  c: [
+    { t: string }, // QuoteType
+    Array<Inline>
+  ]
 }
 
 export interface RawInline {

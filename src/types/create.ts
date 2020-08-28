@@ -1,4 +1,4 @@
-import * as t from './elems'
+import * as t from './elems.js'
 
 export function Attr (
   identifier: string = '',
@@ -20,7 +20,7 @@ export function Citation (
     citationId: id,
     citationPrefix: prefix,
     citationSuffix: suffix,
-    citationMode: { t: String(mode) },
+    citationMode: { t: t.CitationMode[mode] },
     citationNoteNum: noteNum,
     citationHash: hash
   }
@@ -31,7 +31,11 @@ export function ListAttributes (
   style: t.ListNumberStyle = t.ListNumberStyle.DefaultStyle,
   delimiter: t.ListNumberDelim = t.ListNumberDelim.DefaultDelim
 ): t.ListAttributes {
-  return [start, style, delimiter]
+  return [
+    start,
+    { t: t.ListNumberStyle[style] },
+    { t: t.ListNumberDelim[delimiter] }
+  ]
 }
 
 export function TableFoot (): t.TableFoot {
@@ -201,7 +205,7 @@ export function Link (
 export function Math (mathtype: t.MathType, text: string): t.Math {
   return {
     t: 'Math',
-    c: [{ t: mathtype }, text]
+    c: [{ t: t.MathType[mathtype] }, text]
   }
 }
 
@@ -215,7 +219,7 @@ export function Note (content: Array<t.Block>): t.Note {
 export function Quoted (quotetype: t.QuoteType, content: Array<t.Inline>): t.Quoted {
   return {
     t: 'Quoted',
-    c: [{ t: quotetype }, content]
+    c: [{ t: t.QuoteType[quotetype] }, content]
   }
 }
 
