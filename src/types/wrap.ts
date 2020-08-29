@@ -9,6 +9,10 @@ export class BlockQuote {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Block>) {
+    this.elem.c = val
+  }
 }
 
 export class BulletList {
@@ -19,6 +23,10 @@ export class BulletList {
 
   get content () {
     return this.elem.c
+  }
+
+  set content (val: Array<Array<t.Block>>) {
+    this.elem.c = val
   }
 }
 
@@ -48,6 +56,10 @@ export class DefinitionList {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<[Array<t.Inline>, Array<Array<t.Block>>]>) {
+    this.elem.c = val
+  }
 }
 
 export class Div {
@@ -60,6 +72,10 @@ export class Div {
 
   get content () {
     return this.elem.c[1]
+  }
+
+  set content (val: Array<t.Block>) {
+    this.elem.c[1] = val
   }
 }
 
@@ -81,6 +97,10 @@ export class Header {
   get content () {
     return this.elem.c[2]
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c[2] = val
+  }
 }
 
 export class HorizontalRule {
@@ -98,6 +118,10 @@ export class LineBlock {
 
   get content () {
     return this.elem.c
+  }
+
+  set content (val: Array<Array<t.Inline>>) {
+    this.elem.c = val
   }
 }
 
@@ -118,6 +142,10 @@ export class OrderedList {
   get content () {
     return this.elem.c[1]
   }
+
+  set content (val: Array<Array<t.Block>>) {
+    this.elem.c[1] = val
+  }
 }
 
 export class Para {
@@ -129,6 +157,10 @@ export class Para {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class Plain {
@@ -139,6 +171,10 @@ export class Plain {
 
   get content () {
     return this.elem.c
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
   }
 }
 
@@ -184,8 +220,13 @@ export class Cite {
     return this.elem.c[0]
   }
 
+  // TODO set citations?
   get content () {
     return this.elem.c[1]
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c[1] = val
   }
 }
 
@@ -214,6 +255,10 @@ export class Emph {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class Image {
@@ -222,7 +267,7 @@ export class Image {
     this.elem = elem
   }
 
-  // TODO attr
+  // TODO attr, set caption?
   get caption () {
     return this.elem.c[1]
   }
@@ -260,6 +305,10 @@ export class Link {
   // TODO attr
   get content () {
     return this.elem.c[1]
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c[1] = val
   }
 
   get src () {
@@ -312,6 +361,10 @@ export class Note {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Block>) {
+    this.elem.c = val
+  }
 }
 
 export class Quoted {
@@ -331,6 +384,10 @@ export class Quoted {
 
   get content () {
     return this.elem.c[1]
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c[1] = val
   }
 }
 
@@ -366,6 +423,10 @@ export class SmallCaps {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class SoftBreak {
@@ -392,6 +453,10 @@ export class Span {
   get content () {
     return this.elem.c[1]
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c[1] = val
+  }
 }
 
 export class Str {
@@ -400,8 +465,12 @@ export class Str {
     this.elem = elem
   }
 
-  get content () {
+  get text () {
     return this.elem.c
+  }
+
+  set text (val: string) {
+    this.elem.c = val
   }
 }
 
@@ -414,6 +483,10 @@ export class Strikeout {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class Strong {
@@ -424,6 +497,10 @@ export class Strong {
 
   get content () {
     return this.elem.c
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
   }
 }
 
@@ -436,6 +513,10 @@ export class Subscript {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class Superscript {
@@ -447,6 +528,10 @@ export class Superscript {
   get content () {
     return this.elem.c
   }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
+  }
 }
 
 export class Underline {
@@ -457,5 +542,9 @@ export class Underline {
 
   get content () {
     return this.elem.c
+  }
+
+  set content (val: Array<t.Inline>) {
+    this.elem.c = val
   }
 }

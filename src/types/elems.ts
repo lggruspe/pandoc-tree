@@ -123,13 +123,11 @@ export interface TableFoot {
 export interface BlockQuote {
   readonly t: 'BlockQuote'
   c: Array<Block>
-  // content
 }
 
 export interface BulletList {
   readonly t: 'BulletList'
   c: Array<Array<Block>>
-  // content
 }
 
 export interface CodeBlock {
@@ -141,7 +139,6 @@ export interface CodeBlock {
 export interface DefinitionList {
   readonly t: 'DefinitionList'
   c: Array<[Array<Inline>, Array<Array<Block>>]>
-  // content
 }
 
 export interface Div {
@@ -163,7 +160,6 @@ export interface HorizontalRule {
 export interface LineBlock {
   readonly t: 'LineBlock'
   c: Array<Array<Inline>>
-  // content
 }
 
 export interface Null {
@@ -179,19 +175,16 @@ export interface OrderedList {
 export interface Para {
   readonly t: 'Para'
   c: Array<Inline>
-  // content
 }
 
 export interface Plain {
   readonly t: 'Plain'
   c: Array<Inline>
-  // content
 }
 
 export interface RawBlock {
   readonly t: 'RawBlock'
   c: [string, string]
-  // [format, text]
 }
 
 export interface Table {
@@ -215,7 +208,6 @@ export interface Code {
 }
 
 export interface Emph {
-  // content
   readonly t: 'Emph'
   c: Array<Inline>
 }
@@ -237,7 +229,6 @@ export interface Link {
 }
 
 export interface Math {
-  // [mathtype, text]
   readonly t: 'Math'
   c: [
     { t: string }, // MathType
@@ -246,13 +237,11 @@ export interface Math {
 }
 
 export interface Note {
-  // content
   readonly t: 'Note'
   c: Array<Block>
 }
 
 export interface Quoted {
-  // [quotetype, content]
   readonly t: 'Quoted'
   c: [
     { t: string }, // QuoteType
@@ -261,13 +250,11 @@ export interface Quoted {
 }
 
 export interface RawInline {
-  // [format, text]
   readonly t: 'RawInline'
   c: [string, string]
 }
 
 export interface SmallCaps {
-  // content
   readonly t: 'SmallCaps'
   c: Array<Inline>
 }
@@ -287,37 +274,31 @@ export interface Span {
 }
 
 export interface Str {
-  // text
   readonly t: 'Str'
   c: string
 }
 
 export interface Strikeout {
-  // content
   readonly t: 'Strikeout'
   c: Array<Inline>
 }
 
 export interface Strong {
-  // content
   readonly t: 'Strong'
   c: Array<Inline>
 }
 
 export interface Subscript {
-  // content
   readonly t: 'Subscript'
   c: Array<Inline>
 }
 
 export interface Superscript {
-  // content
   readonly t: 'Superscript'
   c: Array<Inline>
 }
 
 export interface Underline {
-  // content
   readonly t: 'Underline'
   c: Array<Inline>
 }
