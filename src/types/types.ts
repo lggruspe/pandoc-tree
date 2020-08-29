@@ -8,12 +8,12 @@ export enum Alignment {
 // identifier, classes, key-value pairs
 export type Attr = [string, Array<string>, Array<[string, string]>]
 
-export interface Caption {
+export type Caption = {
   readonly t: 'Caption'
   c: [(null | Array<Inline>), Array<Block>]
 }
 
-export interface Cell {
+export type Cell = {
   readonly t: 'Cell'
   c: [
     Attr,
@@ -24,7 +24,7 @@ export interface Cell {
   ]
 }
 
-export interface Citation {
+export type Citation = {
   citationId: string
   citationPrefix: Array<Inline>
   citationSuffix: Array<Inline>
@@ -39,7 +39,7 @@ export enum CitationMode {
   NormalCitation
 }
 
-export interface ColSpan {
+export type ColSpan = {
   readonly t: 'ColSpan'
   c: number // integer
 }
@@ -88,102 +88,102 @@ export enum QuoteType {
   DoubleQuote
 }
 
-export interface Row {
+export type Row = {
   readonly t: 'Row'
   c: [Attr, Array<Cell>]
 }
 
-export interface RowHeadColumns {
+export type RowHeadColumns = {
   readonly t: 'RowHeadColumns'
   c: number // integer
 }
 
-export interface RowSpan {
+export type RowSpan = {
   readonly t: 'RowSpan'
   c: number // integer
 }
 
-export interface TableHead {
+export type TableHead = {
   readonly t: 'TableHead'
   c: [Attr, Array<Row>]
 }
 
-export interface TableBody {
+export type TableBody = {
   readonly t: 'TableBody'
   c: [Attr, RowHeadColumns, Array<Row>, Array<Row>]
 }
 
-export interface TableFoot {
+export type TableFoot = {
   readonly t: 'TableFoot'
   c: [Attr, Array<Row>]
 }
 
 // Blocks
 
-export interface BlockQuote {
+export type BlockQuote = {
   readonly t: 'BlockQuote'
   c: Array<Block>
 }
 
-export interface BulletList {
+export type BulletList = {
   readonly t: 'BulletList'
   c: Array<Array<Block>>
 }
 
-export interface CodeBlock {
+export type CodeBlock = {
   readonly t: 'CodeBlock'
   c: [Attr, string]
 }
 
-export interface DefinitionList {
+export type DefinitionList = {
   readonly t: 'DefinitionList'
   c: Array<[Array<Inline>, Array<Array<Block>>]>
 }
 
-export interface Div {
+export type Div = {
   readonly t: 'Div'
   c: [Attr, Array<Block>]
 }
 
-export interface Header {
+export type Header = {
   readonly t: 'Header'
   c: [number, Attr, Array<Inline>]
 }
 
-export interface HorizontalRule {
+export type HorizontalRule = {
   readonly t: 'HorizontalRule'
 }
 
-export interface LineBlock {
+export type LineBlock = {
   readonly t: 'LineBlock'
   c: Array<Array<Inline>>
 }
 
-export interface Null {
+export type Null = {
   readonly t: 'Null'
 }
 
-export interface OrderedList {
+export type OrderedList = {
   readonly t: 'OrderedList'
   c: [ListAttributes, Array<Array<Block>>]
 }
 
-export interface Para {
+export type Para = {
   readonly t: 'Para'
   c: Array<Inline>
 }
 
-export interface Plain {
+export type Plain = {
   readonly t: 'Plain'
   c: Array<Inline>
 }
 
-export interface RawBlock {
+export type RawBlock = {
   readonly t: 'RawBlock'
   c: [string, string]
 }
 
-export interface Table {
+export type Table = {
   readonly t: 'Table'
   c: [Attr, Caption, Array<ColSpec>, TableHead, Array<TableBody>, TableFoot]
   // [attr, caption, colspecs, head, bodies, foot]
@@ -191,36 +191,36 @@ export interface Table {
 
 // Inlines
 
-export interface Cite {
+export type Cite = {
   readonly t: 'Cite'
   c: [Array<Citation>, Array<Inline>]
 }
 
-export interface Code {
+export type Code = {
   readonly t: 'Code'
   c: [Attr, string]
 }
 
-export interface Emph {
+export type Emph = {
   readonly t: 'Emph'
   c: Array<Inline>
 }
 
-export interface Image {
+export type Image = {
   readonly t: 'Image'
   c: [Attr, Array<Inline>, [string, string]]
 }
 
-export interface LineBreak {
+export type LineBreak = {
   readonly t: 'LineBreak'
 }
 
-export interface Link {
+export type Link = {
   readonly t: 'Link'
   c: [Attr, Array<Inline>, [string, string]]
 }
 
-export interface Math {
+export type Math = {
   readonly t: 'Math'
   c: [
     { t: string }, // MathType
@@ -228,12 +228,12 @@ export interface Math {
   ]
 }
 
-export interface Note {
+export type Note = {
   readonly t: 'Note'
   c: Array<Block>
 }
 
-export interface Quoted {
+export type Quoted = {
   readonly t: 'Quoted'
   c: [
     { t: string }, // QuoteType
@@ -241,55 +241,55 @@ export interface Quoted {
   ]
 }
 
-export interface RawInline {
+export type RawInline = {
   readonly t: 'RawInline'
   c: [string, string]
 }
 
-export interface SmallCaps {
+export type SmallCaps = {
   readonly t: 'SmallCaps'
   c: Array<Inline>
 }
 
-export interface SoftBreak {
+export type SoftBreak = {
   readonly t: 'SoftBreak'
 }
 
-export interface Space {
+export type Space = {
   readonly t: 'Space'
 }
 
-export interface Span {
+export type Span = {
   readonly t: 'Span'
   c: [Attr, Array<Inline>]
 }
 
-export interface Str {
+export type Str = {
   readonly t: 'Str'
   c: string
 }
 
-export interface Strikeout {
+export type Strikeout = {
   readonly t: 'Strikeout'
   c: Array<Inline>
 }
 
-export interface Strong {
+export type Strong = {
   readonly t: 'Strong'
   c: Array<Inline>
 }
 
-export interface Subscript {
+export type Subscript = {
   readonly t: 'Subscript'
   c: Array<Inline>
 }
 
-export interface Superscript {
+export type Superscript = {
   readonly t: 'Superscript'
   c: Array<Inline>
 }
 
-export interface Underline {
+export type Underline = {
   readonly t: 'Underline'
   c: Array<Inline>
 }

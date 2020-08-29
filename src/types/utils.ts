@@ -1,4 +1,4 @@
-import * as t from './elems.js'
+import * as t from './types.js'
 import * as w from './wrap.js'
 
 export function wrap (elem: t.Elem): w.Elem {

@@ -1,4 +1,4 @@
-import * as t from './elems.js'
+import * as t from './types.js'
 
 export function Attr (
   identifier: string = '',
