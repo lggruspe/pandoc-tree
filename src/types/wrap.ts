@@ -1,4 +1,33 @@
+import * as c from './create.js'
 import * as t from './elems.js'
+
+abstract class HasAttr {
+  abstract attr: t.Attr
+
+  get identifier () {
+    return this.attr[0]
+  }
+
+  set identifier (val: string) {
+    this.attr[0] = val
+  }
+
+  get classes () {
+    return this.attr[1]
+  }
+
+  set classes (val: Array<string>) {
+    this.attr[1] = val
+  }
+
+  get attributes () {
+    return this.attr[2]
+  }
+
+  set attributes (val: Array<[string, string]>) {
+    this.attr[2] = val
+  }
+}
 
 export class BlockQuote {
   elem: t.BlockQuote
@@ -30,13 +59,20 @@ export class BulletList {
   }
 }
 
-export class CodeBlock {
+export class CodeBlock extends HasAttr {
   elem: t.CodeBlock
   constructor (elem: t.CodeBlock) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
 
   get text () {
     return this.elem.c[1]
@@ -62,13 +98,20 @@ export class DefinitionList {
   }
 }
 
-export class Div {
+export class Div extends HasAttr {
   elem: t.Div
   constructor (elem: t.Div) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
 
   get content () {
     return this.elem.c[1]
@@ -79,13 +122,21 @@ export class Div {
   }
 }
 
-export class Header {
+export class Header extends HasAttr {
   elem: t.Header
   constructor (elem: t.Header) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[1]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[1] = val
+  }
+
   get level () {
     return this.elem.c[0]
   }
@@ -207,6 +258,14 @@ export class Table {
     this.elem = elem
   }
 
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
+
   // TODO attr, caption, colspecs, head, bodies, foot
 }
 
@@ -230,13 +289,21 @@ export class Cite {
   }
 }
 
-export class Code {
+export class Code extends HasAttr {
   elem: t.Code
   constructor (elem: t.Code) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
+
   get text () {
     return this.elem.c[1]
   }
@@ -261,13 +328,22 @@ export class Emph {
   }
 }
 
-export class Image {
+export class Image extends HasAttr {
   elem: t.Image
   constructor (elem: t.Image) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr, set caption?
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
+
+  // TODO set caption?
   get caption () {
     return this.elem.c[1]
   }
@@ -296,13 +372,21 @@ export class LineBreak {
   }
 }
 
-export class Link {
+export class Link extends HasAttr {
   elem: t.Link
   constructor (elem: t.Link) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
+
   get content () {
     return this.elem.c[1]
   }
@@ -443,13 +527,21 @@ export class Space {
   }
 }
 
-export class Span {
+export class Span extends HasAttr {
   elem: t.Span
   constructor (elem: t.Span) {
+    super()
     this.elem = elem
   }
 
-  // TODO attr
+  get attr () {
+    return this.elem.c[0]
+  }
+
+  set attr (val: t.Attr) {
+    this.elem.c[0] = val
+  }
+
   get content () {
     return this.elem.c[1]
   }

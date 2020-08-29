@@ -133,7 +133,6 @@ export interface BulletList {
 export interface CodeBlock {
   readonly t: 'CodeBlock'
   c: [Attr, string]
-  // [attr, text]
 }
 
 export interface DefinitionList {
@@ -144,13 +143,11 @@ export interface DefinitionList {
 export interface Div {
   readonly t: 'Div'
   c: [Attr, Array<Block>]
-  // [attr, content]
 }
 
 export interface Header {
   readonly t: 'Header'
   c: [number, Attr, Array<Inline>]
-  // [level, attr, content]
 }
 
 export interface HorizontalRule {
@@ -202,7 +199,6 @@ export interface Cite {
 }
 
 export interface Code {
-  // [attr, text]
   readonly t: 'Code'
   c: [Attr, string]
 }
@@ -223,7 +219,6 @@ export interface LineBreak {
 }
 
 export interface Link {
-  // [attr, content, [src, title]]
   readonly t: 'Link'
   c: [Attr, Array<Inline>, [string, string]]
 }
@@ -268,7 +263,6 @@ export interface Space {
 }
 
 export interface Span {
-  // [attr, content]
   readonly t: 'Span'
   c: [Attr, Array<Inline>]
 }
