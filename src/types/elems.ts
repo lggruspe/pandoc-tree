@@ -166,7 +166,6 @@ export interface Null {
 export interface OrderedList {
   readonly t: 'OrderedList'
   c: [ListAttributes, Array<Array<Block>>]
-  // [listAttributes, content]
 }
 
 export interface Para {
@@ -193,7 +192,6 @@ export interface Table {
 // Inlines
 
 export interface Cite {
-  // [citations, content]
   readonly t: 'Cite'
   c: [Array<Citation>, Array<Inline>]
 }
@@ -209,7 +207,6 @@ export interface Emph {
 }
 
 export interface Image {
-  // [attr, caption, [src, title]]
   readonly t: 'Image'
   c: [Attr, Array<Inline>, [string, string]]
 }

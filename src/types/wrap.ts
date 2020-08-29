@@ -1,4 +1,3 @@
-import * as c from './create.js'
 import * as t from './elems.js'
 
 abstract class HasAttr {
@@ -189,13 +188,46 @@ export class OrderedList {
     this.elem = elem
   }
 
-  // TODO listAttributes
+  get listAttributes () {
+    return this.elem.c[0]
+  }
+
+  set listAttributes (val: t.ListAttributes) {
+    this.elem.c[0] = val
+  }
+
   get content () {
     return this.elem.c[1]
   }
 
   set content (val: Array<Array<t.Block>>) {
     this.elem.c[1] = val
+  }
+
+  get start () {
+    return this.listAttributes[0]
+  }
+
+  set start (val: number) {
+    this.listAttributes[0] = val
+  }
+
+  get style () {
+    const val = this.listAttributes[1].t
+    return t.ListNumberStyle[val as keyof typeof t.ListNumberStyle]
+  }
+
+  set style (val: t.ListNumberStyle) {
+    this.listAttributes[1].t = t.ListNumberStyle[val]
+  }
+
+  get delimiter () {
+    const val = this.listAttributes[2].t
+    return t.ListNumberDelim[val as keyof typeof t.ListNumberDelim]
+  }
+
+  set delimiter (val: t.ListNumberDelim) {
+    this.listAttributes[2].t = t.ListNumberDelim[val]
   }
 }
 
@@ -279,7 +311,10 @@ export class Cite {
     return this.elem.c[0]
   }
 
-  // TODO set citations?
+  set citations (val: Array<t.Citation>) {
+    this.elem.c[0] = val
+  }
+
   get content () {
     return this.elem.c[1]
   }
@@ -343,9 +378,12 @@ export class Image extends HasAttr {
     this.elem.c[0] = val
   }
 
-  // TODO set caption?
   get caption () {
     return this.elem.c[1]
+  }
+
+  set caption (val: Array<t.Inline>) {
+    this.elem.c[1] = val
   }
 
   get src () {
