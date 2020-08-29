@@ -678,3 +678,43 @@ export class Underline {
     this.elem.c = val
   }
 }
+
+export type Block =
+  | BlockQuote
+  | BulletList
+  | CodeBlock
+  | DefinitionList
+  | Div
+  | Header
+  | HorizontalRule
+  | LineBlock
+  | Null
+  | OrderedList
+  | Para
+  | Plain
+  | RawBlock
+  | Table
+
+export type Inline =
+  | Cite
+  | Code
+  | Emph
+  | Image
+  | LineBreak
+  | Link
+  | Math
+  | Note
+  | Quoted
+  | RawInline
+  | SmallCaps
+  | SoftBreak
+  | Space
+  | Span
+  | Str
+  | Strikeout
+  | Strong
+  | Subscript
+  | Superscript
+  | Underline
+
+export type Elem = Block | Inline

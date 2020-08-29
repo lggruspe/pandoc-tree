@@ -331,3 +331,5 @@ export type Block =
   | Plain
   | RawBlock
   | Table
+
+export type Elem = Block | Inline
