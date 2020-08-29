@@ -1,5 +1,58 @@
 import * as t from './types.js'
 
+export function MetaBlocks (blocks: Array<t.Block>): t.MetaBlocks {
+  return {
+    t: 'MetaBlocks',
+    c: blocks
+  }
+}
+
+export function MetaInlines (inlines: Array<t.Inline>): t.MetaInlines {
+  return {
+    t: 'MetaInlines',
+    c: inlines
+  }
+}
+
+export function MetaList (values: Array<t.MetaValue>): t.MetaList {
+  return {
+    t: 'MetaList',
+    c: values
+  }
+}
+
+export function MetaMap (map: t.Meta): t.MetaMap {
+  return {
+    t: 'MetaMap',
+    c: map
+  }
+}
+
+export function MetaBool (bool: boolean): t.MetaBool {
+  return {
+    t: 'MetaBool',
+    c: bool
+  }
+}
+
+export function MetaString (str: string): t.MetaString {
+  return {
+    t: 'MetaString',
+    c: str
+  }
+}
+
+export function Pandoc (
+  blocks: Array<t.Block>,
+  meta: t.Meta = {}
+): t.Pandoc {
+  return {
+    meta: meta,
+    blocks: blocks,
+    'pandoc-api-version': [1, 21]
+  }
+}
+
 export function Attr (
   identifier: string = '',
   classes: Array<string> = [],

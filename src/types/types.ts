@@ -1,3 +1,51 @@
+export type MetaBlocks = {
+  readonly t: 'MetaBlocks'
+  c: Array<Block>
+}
+
+export type MetaBool = {
+  readonly t: 'MetaBool'
+  c: boolean
+}
+
+export type MetaInlines = {
+  readonly t: 'MetaInlines'
+  c: Array<Inline>
+}
+
+export type MetaList = {
+  readonly t: 'MetaList'
+  c: Array<MetaValue>
+}
+
+export type MetaMap = {
+  readonly t: 'MetaMap'
+  c: Meta
+}
+
+export type MetaString = {
+  readonly t: 'MetaString'
+  c: string
+}
+
+export type MetaValue =
+  | MetaBlocks
+  | MetaBool
+  | MetaInlines
+  | MetaList
+  | MetaMap
+  | MetaString
+
+export type Meta = {
+  [key: string]: MetaValue
+}
+
+export type Pandoc = {
+  meta: Meta,
+  blocks: Array<Block>,
+  'pandoc-api-version': [1, 21]
+}
+
 export enum Alignment {
   AlignLeft,
   AlignRight,
