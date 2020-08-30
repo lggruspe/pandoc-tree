@@ -38,5 +38,6 @@ export type FilterSet = {
   Plain?: (elem: t.Plain) => BlockResult,
   RawBlock?: (elem: t.RawBlock) => BlockResult,
   Table?: (elem: t.Table) => BlockResult,
+  Meta?: (meta: t.Meta) => t.Meta,
   Pandoc?: (doc: t.Pandoc) => t.Pandoc
 }

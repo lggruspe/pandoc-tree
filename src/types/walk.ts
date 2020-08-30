@@ -18,7 +18,7 @@ export function applyFilterSet (
   fns: f.FilterSet
 ): t.Pandoc {
   doc.blocks = walkBlocks(doc.blocks, fns)
-  // TODO walk doc.meta
+  doc.meta = fns.Meta ? fns.Meta(doc.meta) || doc.meta : doc.meta
   return fns.Pandoc ? fns.Pandoc(doc) || doc : doc
 }
 
