@@ -28,6 +28,8 @@ abstract class HasAttr {
   }
 }
 
+// Blocks
+
 export class BlockQuote {
   elem: t.BlockQuote
   constructor (elem: t.BlockQuote) {
@@ -300,6 +302,8 @@ export class Table {
 
   // TODO attr, caption, colspecs, head, bodies, foot
 }
+
+// Inlines
 
 export class Cite {
   elem: t.Cite
