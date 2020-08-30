@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+import * as create from '../create.js'
+import { interact } from '../index.js'
+import { FilterSet } from '../filter.js'
+import { wrap } from '../utils.js'
+import * as w from '../wrap.js'
+import * as t from '../types.js'
+
+const fns1: FilterSet = {
+  Str: function (elem) {
+    const str = new w.Str(elem)
+    str.text = str.text.toUpperCase()
+  }
+}
+
+class Fns2 implements FilterSet {
+  Str (elem: t.Str) {
+    return create.Link([elem], '#', 'test title')
+  }
+}
+
+const fns2 = new Fns2()
+interact([fns1, fns2])
