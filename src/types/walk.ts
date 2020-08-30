@@ -5,7 +5,7 @@ import * as wi from './walk/inlines.js'
 
 export function applyFilter (
   doc: t.Pandoc,
-  filter: f.Filter
+  filter: Array<f.FilterSet>
 ): t.Pandoc {
   for (const fns of filter) {
     doc = applyFilterSet(doc, fns)

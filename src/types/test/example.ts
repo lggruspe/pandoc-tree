@@ -14,6 +14,10 @@ const fns1: FilterSet = {
   }
 }
 
+fns1.Header = function (elem) {
+    console.error(elem)
+}
+
 class Fns2 implements FilterSet {
   Str (elem: t.Str) {
     return create.Link([elem], '#', 'test title')

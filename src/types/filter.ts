@@ -40,5 +40,3 @@ export type FilterSet = {
   Table?: (elem: t.Table) => BlockResult,
   Pandoc?: (doc: t.Pandoc) => t.Pandoc
 }
-
-export type Filter = Array<FilterSet>
