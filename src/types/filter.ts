@@ -1,7 +1,7 @@
 import * as t from './types.js'
 
-export type InlineResult = t.Inline | Array<t.Inline>
-export type BlockResult = t.Block | Array<t.Block>
+export type InlineResult = t.Inline | Array<t.Inline> | void
+export type BlockResult = t.Block | Array<t.Block> | void
 
 export type FilterSet = {
   Cite?: (elem: t.Cite) => InlineResult,
