@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import * as create from '../create.js'
-import { interact } from '../index.js'
-import { FilterSet } from '../filter.js'
+import { FilterSet, interact } from '../filter.js'
 import { wrap } from '../utils.js'
 import * as w from '../wrap.js'
 import * as t from '../types.js'
