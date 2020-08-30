@@ -244,9 +244,33 @@ namespace walk {
     }
 
     export function Table (elem: t.Table, fns: FilterSet): BlockResult {
-      // TODO
-      throw new Error('not implemented')
-      // return fns.Table ? fns.Table(elem) : elem
+      if (elem.c[1].c[0]) {
+        elem.c[1].c[0] = walkInlines(elem.c[1].c[0], fns)
+      }
+      elem.c[1].c[1] = walkBlocks(elem.c[1].c[1], fns)
+      for (const headRow of elem.c[3].c[1]) {
+        for (const cell of headRow.c[1]) {
+          cell.c[4] = walkBlocks(cell.c[4], fns)
+        }
+      }
+      for (const body of elem.c[4]) {
+        for (const row of body.c[2]) {
+          for (const cell of row.c[1]) {
+            cell.c[4] = walkBlocks(cell.c[4], fns)
+          }
+        }
+        for (const row of body.c[3]) {
+          for (const cell of row.c[1]) {
+            cell.c[4] = walkBlocks(cell.c[4], fns)
+          }
+        }
+      }
+      for (const footRow of elem.c[5].c[1]) {
+        for (const cell of footRow.c[1]) {
+          cell.c[4] = walkBlocks(cell.c[4], fns)
+        }
+      }
+      return fns.Table ? fns.Table(elem) : elem
     }
   }
 }

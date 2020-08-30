@@ -234,7 +234,6 @@ export type RawBlock = {
 export type Table = {
   readonly t: 'Table'
   c: [Attr, Caption, Array<ColSpec>, TableHead, Array<TableBody>, TableFoot]
-  // [attr, caption, colspecs, head, bodies, foot]
 }
 
 // Inlines

@@ -91,6 +91,22 @@ export function ListAttributes (
   ]
 }
 
+export function Caption (): t.Caption {
+  throw new Error('not implemented')
+}
+
+export function ColSpec (): t.ColSpec {
+  throw new Error('not implemented')
+}
+
+export function TableHead (): t.TableHead {
+  throw new Error('not implemented')
+}
+
+export function TableBody (): t.TableBody {
+  throw new Error('not implemented')
+}
+
 export function TableFoot (): t.TableFoot {
   throw new Error('not implemented')
 }
@@ -193,13 +209,17 @@ export function RawBlock (format: string, text: string): t.RawBlock {
 }
 
 export function Table (
-  caption: any,
-  aligns: any,
-  widths: any,
-  headers: any,
-  rows: any
+  attr: t.Attr,
+  caption: t.Caption,
+  colspecs: Array<t.ColSpec>,
+  head: t.TableHead,
+  bodies: Array<t.TableBody>,
+  foot: t.TableFoot
 ): t.Table {
-  throw new Error('not implemented')
+  return {
+    t: 'Table',
+    c: [attr, caption, colspecs, head, bodies, foot]
+  }
 }
 
 // Inlines

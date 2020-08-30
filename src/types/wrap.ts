@@ -300,7 +300,45 @@ export class Table {
     this.elem.c[0] = val
   }
 
-  // TODO attr, caption, colspecs, head, bodies, foot
+  get caption () {
+    return this.elem.c[1]
+  }
+
+  set caption (val: t.Caption) {
+    this.elem.c[1] = val
+  }
+
+  get colspecs () {
+    return this.elem.c[2]
+  }
+
+  set colspecs (val: Array<t.ColSpec>) {
+    this.elem.c[2] = val
+  }
+
+  get head () {
+    return this.elem.c[3]
+  }
+
+  set head (val: t.TableHead) {
+    this.elem.c[3] = val
+  }
+
+  get bodies () {
+    return this.elem.c[4]
+  }
+
+  set bodies (val: Array<t.TableBody>) {
+    this.elem.c[4] = val
+  }
+
+  get foot () {
+    return this.elem.c[5]
+  }
+
+  set foot (val: t.TableFoot) {
+    this.elem.c[5] = val
+  }
 }
 
 // Inlines
