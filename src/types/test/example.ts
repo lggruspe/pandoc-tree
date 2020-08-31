@@ -2,7 +2,6 @@
 
 import * as create from '../create.js'
 import { FilterSet, interact } from '../filter.js'
-import { wrap } from '../utils.js'
 import * as w from '../wrap.js'
 import * as t from '../types.js'
 
@@ -14,7 +13,7 @@ const fns1: FilterSet = {
 }
 
 fns1.Header = function (elem) {
-    console.error(elem)
+  console.error(elem)
 }
 
 class Fns2 implements FilterSet {
