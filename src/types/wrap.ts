@@ -1,4 +1,4 @@
-import * as t from './types.js'
+import * as t from './types'
 
 abstract class HasAttr {
   abstract attr: t.Attr
