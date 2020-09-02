@@ -380,3 +380,51 @@ export type Block =
   | Table
 
 export type Elem = Block | Inline
+
+const INLINE_TAGS = new Set([
+  'Cite',
+  'Code',
+  'Emph',
+  'Image',
+  'LineBreak',
+  'Link',
+  'Math',
+  'Note',
+  'Quoted',
+  'RawInline',
+  'SmallCaps',
+  'SoftBreak',
+  'Space',
+  'Span',
+  'Str',
+  'Strikeout',
+  'Strong',
+  'Subscript',
+  'Superscript',
+  'Underline'
+])
+
+const BLOCK_TAGS = new Set([
+  'BlockQuote',
+  'BulletList',
+  'CodeBlock',
+  'DefinitionList',
+  'Div',
+  'Header',
+  'HorizontalRule',
+  'LineBlock',
+  'Null',
+  'OrderedList',
+  'Para',
+  'Plain',
+  'RawBlock',
+  'Table'
+])
+
+export function isBlock (elem: Elem): elem is Block {
+  return BLOCK_TAGS.has(elem.t)
+}
+
+export function isInline (elem: Elem): elem is Inline {
+  return INLINE_TAGS.has(elem.t)
+}
