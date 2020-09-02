@@ -28,6 +28,62 @@ abstract class HasAttr {
   }
 }
 
+export class Citation {
+  elem: t.Citation
+  constructor (elem: t.Citation) {
+    this.elem = elem
+  }
+
+  get id () {
+    return this.elem.citationId
+  }
+
+  set id (val: string) {
+    this.elem.citationId = val
+  }
+
+  get mode () {
+    const val = this.elem.citationMode.t
+    return t.CitationMode[val as keyof typeof t.CitationMode]
+  }
+
+  set mode (val: t.CitationMode) {
+    this.elem.citationMode.t = t.CitationMode[val]
+  }
+
+  get prefix () {
+    return this.elem.citationPrefix
+  }
+
+  set prefix (val: Array<t.Inline>) {
+    this.elem.citationPrefix = val
+  }
+
+  get suffix () {
+    return this.elem.citationSuffix
+  }
+
+  set suffix (val: Array<t.Inline>) {
+    this.elem.citationSuffix = val
+  }
+
+  get noteNum () {
+    return this.elem.citationNoteNum
+  }
+
+  set noteNum (val: number) {
+    this.elem.citationNoteNum = val
+  }
+
+  get hash () {
+    return this.elem.citationHash
+  }
+
+  set hash (val: number) {
+    this.elem.citationHash = val
+  }
+}
+
 // Blocks
 
 export class BlockQuote {
