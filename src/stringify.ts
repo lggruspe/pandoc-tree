@@ -1,4 +1,4 @@
-import * as t from './types'
+import * as t from './types.js'
 
 function concat (a: string, b: string): string {
   return a + b

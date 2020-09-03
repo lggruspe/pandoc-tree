@@ -1,4 +1,4 @@
-import * as t from './types'
+import * as t from './types.js'
 
 export function MetaBlocks (blocks: Array<t.Block>): t.MetaBlocks {
   return {

@@ -1,4 +1,4 @@
-import * as t from './types'
+import * as t from './types.js'
 
 export type InlineResult = t.Inline | Array<t.Inline> | void
 export type BlockResult = t.Block | Array<t.Block> | void

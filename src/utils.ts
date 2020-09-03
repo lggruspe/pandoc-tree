@@ -1,7 +1,7 @@
-import * as create from './create'
-import * as t from './types'
-import * as wrap from './wrap'
-export { stringify } from './stringify'
+import * as create from './create.js'
+import * as t from './types.js'
+import * as wrap from './wrap.js'
+export { stringify } from './stringify.js'
 
 function findNext (
   elems: Array<t.Elem>,

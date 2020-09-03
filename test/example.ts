@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import * as create from '../src/create'
-import { FilterSet, interact } from '../src/filter'
-import * as w from '../src/wrap'
-import * as t from '../src/types'
+import * as create from '../src/create.js'
+import { FilterSet, interact } from '../src/filter.js'
+import * as w from '../src/wrap.js'
+import * as t from '../src/types.js'
 
 const fns1: FilterSet = {
   Str: function (elem) {

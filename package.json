@@ -4,6 +4,7 @@
   "description": "Pandoc filters library",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "type": "module",
   "files": [
       "dist"
   ],
