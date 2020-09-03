@@ -30,7 +30,7 @@ abstract class HasAttr {
 
 export class Attr {
   elem: t.Attr
-  _attr: { [key: string]: any }
+  _attr: { [key: string]: string }
   constructor (elem: t.Attr) {
     this.elem = elem
     this._attr = Object.fromEntries(elem[2])
@@ -56,7 +56,7 @@ export class Attr {
     return this._attr
   }
 
-  set attributes (val: { [key: string]: any }) {
+  set attributes (val: { [key: string]: string }) {
     this._attr = val
     this.save()
   }

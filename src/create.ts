@@ -56,7 +56,7 @@ export function Pandoc (
 export function Attr (
   identifier: string = '',
   classes: Array<string> = [],
-  attributes: object = {}
+  attributes: { [key: string]: string } = {}
 ): t.Attr {
   return [identifier, classes, Object.entries(attributes)]
 }
