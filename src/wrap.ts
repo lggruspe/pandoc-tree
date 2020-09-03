@@ -28,6 +28,44 @@ abstract class HasAttr {
   }
 }
 
+export class Attr {
+  elem: t.Attr
+  _attr: { [key: string]: any }
+  constructor (elem: t.Attr) {
+    this.elem = elem
+    this._attr = Object.fromEntries(elem[2])
+  }
+
+  get identifier () {
+    return this.elem[0]
+  }
+
+  set identifier (val: string) {
+    this.elem[0] = val
+  }
+
+  get classes () {
+    return this.elem[1]
+  }
+
+  set classes (val: Array<string>) {
+    this.elem[1] = val
+  }
+
+  get attributes () {
+    return this._attr
+  }
+
+  set attributes (val: { [key: string]: any }) {
+    this._attr = val
+    this.save()
+  }
+
+  save () {
+    this.elem[2] = Object.entries(this._attr)
+  }
+}
+
 export class Citation {
   elem: t.Citation
   constructor (elem: t.Citation) {
