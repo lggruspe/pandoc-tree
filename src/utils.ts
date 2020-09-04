@@ -38,7 +38,7 @@ export function makeTopLevelSections (
       const slice = blocks.splice(prev, next - prev, div)
       new wrap.Div(div).content = slice
     }
-    prev = next
+    prev++
   }
   return blocks
 }
