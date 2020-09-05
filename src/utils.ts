@@ -1,6 +1,7 @@
 import * as create from './create.js'
+import * as get from './get.js'
+import * as set from './set.js'
 import * as t from './types.js'
-import * as wrap from './wrap.js'
 export { stringify } from './stringify.js'
 
 function findNext (
@@ -21,7 +22,7 @@ function findNext (
 }
 
 function isTopLevel (elem: t.Elem): boolean {
-  return elem.t === 'Header' && new wrap.Header(elem).level === 1
+  return elem.t === 'Header' && get.level(elem) === 1
 }
 
 export function makeTopLevelSections (
@@ -36,7 +37,7 @@ export function makeTopLevelSections (
       const block = blocks[prev]
       const div = create.Div([], fn(block as t.Header))
       const slice = blocks.splice(prev, next - prev, div)
-      new wrap.Div(div).content = slice
+      set.content(div, slice)
     }
     prev++
   }

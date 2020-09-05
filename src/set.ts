@@ -15,15 +15,17 @@ function identifier (elem: HasAttr | t.Attr, val: string): void {
 function classes (elem: HasAttr | t.Attr, val: Array<string>): void {
   if (elem instanceof Array) {
     elem[1] = val
+  } else {
+    classes(get.attr(elem as HasAttr), val)
   }
-  classes(get.attr(elem as HasAttr), val)
 }
 
 function attributes (elem: HasAttr | t.Attr, val: Array<[string, string]>): void {
   if (elem instanceof Array) {
     elem[2] = val
+  } else {
+    attributes(get.attr(elem as HasAttr), val)
   }
-  attributes(get.attr(elem as HasAttr), val)
 }
 
 function id (citation: t.Citation, val: string): void {
@@ -227,7 +229,18 @@ function title (elem: t.Image | t.Link, val: string): void{
   elem.c[2][1] = val
 }
 
+function withAttributes (
+  elem: HasAttr,
+  callback: (attr: { [key: string]: string }) => void
+): void {
+  const attr = Object.fromEntries(get.attributes(elem))
+  callback(attr)
+  attributes(elem, Object.entries(attr))
+}
+
 export {
+  withAttributes,
+
   identifier,
   classes,
   attributes,

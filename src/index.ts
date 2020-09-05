@@ -5,4 +5,5 @@ export * as set from './set.js'
 export * as stringify from './stringify.js'
 export * as types from './types.js'
 export * as utils from './utils.js'
-export * as wrap from './wrap.js'
+
+export { withAttributes } from './set.js'

@@ -3,14 +3,14 @@
 import {
   create,
   filter as f,
-  types as t,
-  wrap as w
+  get,
+  set,
+  types as t
 } from '../src/index.js'
 
 const fns1: f.FilterSet = {
   Str: function (elem) {
-    const str = new w.Str(elem)
-    str.text = str.text.toUpperCase()
+    set.text(elem, get.text(elem).toUpperCase())
   }
 }
 
