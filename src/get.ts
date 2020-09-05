@@ -7,21 +7,21 @@ function identifier (elem: HasAttr | t.Attr): string {
   if (elem instanceof Array) {
     return elem[0]
   }
-  return identifier(attr(elem as any))
+  return identifier(attr(elem))
 }
 
 function classes (elem: HasAttr | t.Attr): Array<string> {
   if (elem instanceof Array) {
     return elem[1]
   }
-  return classes(attr(elem as any))
+  return classes(attr(elem))
 }
 
 function attributes (elem: HasAttr | t.Attr): Array<[string, string]> {
   if (elem instanceof Array) {
     return elem[2]
   }
-  return attributes(attr(elem as any))
+  return attributes(attr(elem))
 }
 
 function id (citation: t.Citation): string {
@@ -149,7 +149,7 @@ function foot (elem: t.Table): t.TableFoot {
   return elem.c[5]
 }
 
-function format (elem: t.RawBlock | t.RawInline) {
+function format (elem: t.RawBlock | t.RawInline): string {
   return elem.c[0]
 }
 
