@@ -265,13 +265,13 @@ export function LineBreak (): t.LineBreak {
 
 export function Link (
   content: Array<t.Inline>,
-  src: string,
+  target: string,
   title: string = '',
   attr: t.Attr = Attr()
 ): t.Link {
   return {
     t: 'Link',
-    c: [attr, content, [src, title]]
+    c: [attr, content, [target, title]]
   }
 }
 

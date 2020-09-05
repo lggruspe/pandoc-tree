@@ -569,11 +569,11 @@ export class Link extends HasAttr {
     this.elem.c[1] = val
   }
 
-  get src () {
+  get target () {
     return this.elem.c[2][0]
   }
 
-  set src (val: string) {
+  set target (val: string) {
     this.elem.c[2][0] = val
   }
 
