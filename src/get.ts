@@ -24,6 +24,33 @@ function attributes (elem: HasAttr | t.Attr): Array<[string, string]> {
   return attributes(attr(elem as any))
 }
 
+function id (citation: t.Citation): string {
+  return citation.citationId
+}
+
+function mode (citation: t.Citation): t.CitationMode {
+  const tag = citation.citationMode.t
+  return t.CitationMode[tag as keyof typeof t.CitationMode]
+}
+
+function prefix (citation: t.Citation): Array<t.Inline> {
+  return citation.citationPrefix
+}
+
+function suffix (citation: t.Citation): Array<t.Inline> {
+  return citation.citationSuffix
+}
+
+function noteNum (citation: t.Citation): number {
+  return citation.citationNoteNum
+}
+
+function hash (citation: t.Citation): number {
+  return citation.citationHash
+}
+
+// Element properties
+
 function attr (
   elem: t.CodeBlock | t.Div | t.Header | t.Table
     | t.Code | t.Image | t.Link | t.Span
@@ -180,6 +207,12 @@ export {
   identifier,
   classes,
   attributes,
+  id,
+  mode,
+  prefix,
+  suffix,
+  noteNum,
+  hash,
 
   attr,
   bodies,
