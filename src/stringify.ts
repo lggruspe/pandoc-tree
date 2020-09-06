@@ -16,7 +16,7 @@ function concatenateBlocks (elems: Array<t.Block>): string {
   return elems.reduce(concatenate, '')
 }
 
-export namespace block {
+export namespace element {
   export function BlockQuote (elem: t.BlockQuote): string {
     return elem.c.reduce(concatenate, '')
   }
@@ -74,9 +74,7 @@ export namespace block {
   export function Table (elem: t.Table): string {
     throw new Error('not implemented')
   }
-}
 
-export namespace inline {
   export function Cite (elem: t.Cite): string {
     return concatenateInlines(elem.c[1])
   }
@@ -160,14 +158,6 @@ export namespace inline {
 
 export function stringify (elem: t.Elem): string {
   const tag = elem.t
-  if (t.isBlock(elem)) {
-    const wb = block
-    const fn = wb[tag as keyof typeof wb]
-    return fn(elem as any)
-  } else if (t.isInline(elem)) {
-    const wi = inline
-    const fn = wi[tag as keyof typeof wi]
-    return fn(elem as any)
-  }
-  return ''
+  const fn = element[tag as keyof typeof element]
+  return fn(elem as any)
 }
