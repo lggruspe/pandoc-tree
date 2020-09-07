@@ -60,7 +60,7 @@ export function interact (filter: Array<FilterSet>) {
   })
 }
 
-export function applyFilter (
+function applyFilter (
   doc: t.Pandoc,
   filter: Array<FilterSet>
 ): t.Pandoc {
@@ -70,7 +70,7 @@ export function applyFilter (
   return doc
 }
 
-export function applyFilterSet (
+function applyFilterSet (
   doc: t.Pandoc,
   fns: FilterSet
 ): t.Pandoc {

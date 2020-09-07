@@ -2,11 +2,12 @@
 
 import {
   create,
-  filter,
+  FilterSet,
+  interact,
   types
 } from '../src/index.js'
 
-const fs: filter.FilterSet = {
+const fs: FilterSet = {
   Pandoc: function (doc) {
     const block = (b: types.Block) => doc.blocks.push(b)
     const inline = (i: types.Inline) => doc.blocks.push(create.Para([i]))
@@ -122,45 +123,13 @@ const fs: filter.FilterSet = {
     // TODO Cite
 
     inline(create.Code('a'))
-
-    inline(
-      create.Emph([
-        create.Str('a')
-      ])
-    )
-
-    inline(
-      create.Image(
-        [
-          create.Str('a')
-        ],
-        'b',
-        'c'
-      )
-    )
-
+    inline(create.Emph([create.Str('a')]))
+    inline(create.Image([create.Str('a')], 'b', 'c'))
     inline(create.LineBreak())
-
-    inline(
-      create.Link(
-        [
-          create.Str('a')
-        ],
-        'b',
-        'c'
-      )
-    )
-
+    inline(create.Link([create.Str('a')], 'b', 'c'))
     inline(create.Math(types.MathType.InlineMath, 'a'))
     inline(create.Math(types.MathType.DisplayMath, 'a'))
-
-    inline(
-      create.Note([
-        create.Para([
-          create.Str('a')
-        ])
-      ])
-    )
+    inline(create.Note([create.Para([create.Str('a')])]))
 
     inline(
       create.Quoted(
@@ -180,51 +149,18 @@ const fs: filter.FilterSet = {
     )
 
     inline(create.RawInline('html', '<p>a</p>'))
-
-    inline(
-      create.SmallCaps([
-        create.Str('a')
-      ])
-    )
-
+    inline(create.SmallCaps([create.Str('a')]))
     inline(create.SoftBreak())
     inline(create.Space())
-
-    inline(
-      create.Span([
-        create.Str('a')
-      ])
-    )
-
+    inline(create.Span([create.Str('a')]))
     inline(create.Str('a'))
-
-    inline(
-      create.Strikeout([
-        create.Str('a')
-      ])
-    )
-    inline(
-      create.Strong([
-        create.Str('a')
-      ])
-    )
-    inline(
-      create.Superscript([
-        create.Str('a')
-      ])
-    )
-    inline(
-      create.Subscript([
-        create.Str('a')
-      ])
-    )
-    inline(
-      create.Underline([
-        create.Str('a')
-      ])
-    )
+    inline(create.Strikeout([create.Str('a')]))
+    inline(create.Strong([create.Str('a')]))
+    inline(create.Superscript([create.Str('a')]))
+    inline(create.Subscript([create.Str('a')]))
+    inline(create.Underline([create.Str('a')]))
     return doc
   }
 }
 
-filter.interact([fs])
+interact([fs])

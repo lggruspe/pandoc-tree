@@ -6,4 +6,5 @@ export * as stringify from './stringify.js'
 export * as types from './types.js'
 export * as utils from './utils.js'
 
+export { FilterSet, interact } from './filter.js'
 export { withAttributes } from './set.js'
