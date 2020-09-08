@@ -68,6 +68,12 @@ local function Pandoc(doc)
   }))
 
   block(pandoc.HorizontalRule())
+
+  block(pandoc.LineBlock {
+    { pandoc.Str "a" },
+    { pandoc.Str "b" },
+  })
+
   block(pandoc.Null())
 
   block(pandoc.OrderedList {
@@ -93,6 +99,19 @@ local function Pandoc(doc)
 
   block(pandoc.RawBlock("html", "<p>a</p>"))
 
+  inline(pandoc.Cite(
+    { pandoc.Str "a" },
+    {
+      pandoc.Citation(
+        "b",
+        "NormalCitation",
+        { pandoc.Str "c" },
+        { pandoc.Str "d" },
+        0,
+        1
+      )
+    }
+  ))
   inline(pandoc.Code "a")
   inline(pandoc.Emph { pandoc.Str "a" })
 

@@ -1,3 +1,4 @@
+import * as get from './get.js'
 import * as t from './types.js'
 
 function concat (a: string, b: string): string {
@@ -16,7 +17,7 @@ function concatenateBlocks (elems: Array<t.Block>): string {
   return elems.reduce(concatenate, '')
 }
 
-export namespace element {
+namespace element {
   export function BlockQuote (elem: t.BlockQuote): string {
     return elem.c.reduce(concatenate, '')
   }
@@ -108,7 +109,14 @@ export namespace element {
   }
 
   export function Quoted (elem: t.Quoted): string {
-    return concatenateInlines(elem.c[1])
+    const content = concatenateInlines(elem.c[1])
+    switch (get.quotetype(elem)) {
+      case t.QuoteType.SingleQuote:
+        return `‘${content}’`
+      case t.QuoteType.DoubleQuote:
+        return `“${content}”`
+    }
+    throw new Error('unreachable')
   }
 
   export function RawInline (elem: t.RawInline): string {
@@ -154,9 +162,18 @@ export namespace element {
   export function Underline (elem: t.Underline): string {
     return concatenateInlines(elem.c)
   }
+
+  export function Pandoc (doc: t.Pandoc): string {
+    return concatenateBlocks(doc.blocks)
+  }
 }
 
-export function stringify (elem: t.Elem): string {
+function isDocument (elem: t.Elem | t.Pandoc): elem is t.Pandoc {
+  return !(elem as any).t
+}
+
+export function stringify (elem: t.Elem | t.Pandoc): string {
+  if (isDocument(elem)) return element.Pandoc(elem)
   const tag = elem.t
   const fn = element[tag as keyof typeof element]
   return fn(elem as any)

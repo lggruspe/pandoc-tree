@@ -83,7 +83,18 @@ const fs: FilterSet = {
 
     block(create.HorizontalRule())
 
-    // TODO LineBlock
+    block(
+      create.LineBlock(
+        [
+          [
+            create.Str('a')
+          ],
+          [
+            create.Str('b')
+          ]
+        ]
+      )
+    )
 
     block(create.Null())
 
@@ -120,7 +131,27 @@ const fs: FilterSet = {
 
     // Test inlines
 
-    // TODO Cite
+    inline(
+      create.Cite(
+        [
+          create.Str('a')
+        ],
+        [
+          create.Citation(
+            'b',
+            types.CitationMode.NormalCitation,
+            [
+              create.Str('c')
+            ],
+            [
+              create.Str('d')
+            ],
+            0,
+            1
+          )
+        ]
+      )
+    )
 
     inline(create.Code('a'))
     inline(create.Emph([create.Str('a')]))
